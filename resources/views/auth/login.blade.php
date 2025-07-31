@@ -3,15 +3,15 @@
 @section('contenido')
     <section class="auth d-flex">
         <div class="auth-left bg-main-50 flex-center p-24">
-            <img src="{{ asset('assets_private/images/thumbs/auth-img1.png')}}" alt="">
+            <img src="{{ asset('assets_private/images/thumbs/LoginFoto.jpeg')}}" alt="Foto de la ignauguración del RobotFest" style="border: none; margin: 0; padding: 0; display: block;">
         </div>
         <div class="auth-right py-40 px-24 flex-center flex-column">
             <div class="auth-right__inner mx-auto w-100">
                 <a href="index.html" class="auth-right__logo">
-                    <img src="{{ asset('assets_private/images/logo/logo.png')}}" alt="">
+                    <img src="{{ asset('assets_private/images/logo/logoemi.jpeg')}}" alt="LogoEmi">  
                 </a>
-                <h2 class="mb-8">bienvenido &#128075;</h2>
-                <p class="text-gray-600 text-15 mb-32">Please sign in to your account and start the adventure</p>
+                <h2 class="mb-8">bienvenido/ &#128075;</h2>
+                <p class="text-gray-600 text-15 mb-32">Inicia sesión en tu cuenta y comienza la aventura</p>
 
                 <form method="POST" action="{{ route('login') }}">
                     @csrf

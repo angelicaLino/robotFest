@@ -51,7 +51,7 @@
     <!-- sidebar close btn -->
     
     <a href="index.html" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
-        <img src="{{ asset('assets_private/images/logo/logo.png') }}" alt="Logo">
+        <img src="{{ asset('assets_private/images/logo/selloemi.png') }}" alt="Logo">
     </a>
 
     <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">
@@ -63,7 +63,7 @@
                         <span class="text">Dashboard</span>
                         <span class="link-badge">3</span>
                     </a>
-                    <!-- Submenu start -->
+                    <!-- Submenu t -->
                     <ul class="sidebar-submenu">
                         <li class="sidebar-submenu__item">
                             <a href="index.html" class="sidebar-submenu__link"> Dashboard One </a>
@@ -94,24 +94,26 @@
                             <a href="create-course.html" class="sidebar-submenu__link"> Create Course </a>
                         </li>
                     </ul>
-                    <!-- Submenu End -->
+                    <!-- Equipos -->
                 </li>
                 <li class="sidebar-menu__item">
                     <a href="students.html" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-users-three"></i></span>
-                        <span class="text">Students</span>
+                        <span class="text">Equipos</span>
                     </a>
                 </li>
+                
+                <li class="sidebar-menu__item">
+                    <a href="mentors.html" class="sidebar-menu__link">
+                        <span class="icon"><i class="ph ph-users"></i></span>
+                        <span class="text">Usuarios</span>
+                    </a>
+                </li>
+                 </li>
                 <li class="sidebar-menu__item">
                     <a href="assignment.html" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-clipboard-text"></i></span>
                         <span class="text">Assignments</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="mentors.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-users"></i></span>
-                        <span class="text">Mentors</span>
                     </a>
                 </li>
                 <li class="sidebar-menu__item">
