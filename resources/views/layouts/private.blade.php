@@ -99,7 +99,7 @@
                
                 <!-- Equipos -->
                 <li class="sidebar-menu__item">
-                    <a href="{{ route('equipos.index') }}" class="sidebar-menu__link">
+                    <a href="#" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-users-three"></i></span>
                         <span class="text">Equipos</span>
                     </a>
