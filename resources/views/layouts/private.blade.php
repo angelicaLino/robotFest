@@ -94,19 +94,28 @@
                             <a href="create-course.html" class="sidebar-submenu__link"> Create Course </a>
                         </li>
                     </ul>
-                    <!-- Equipos -->
+                 
                 </li>
+               
+                <!-- Equipos -->
                 <li class="sidebar-menu__item">
-                    <a href="students.html" class="sidebar-menu__link">
+                    <a href="{{ route('equipos.index') }}" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-users-three"></i></span>
                         <span class="text">Equipos</span>
                     </a>
                 </li>
-                
+
+
                 <li class="sidebar-menu__item">
                     <a href="mentors.html" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-users"></i></span>
                         <span class="text">Usuarios</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu__item">
+                    <a href="mentors.html" class="sidebar-menu__link">
+                        <span class="icon"><i class="ph ph-shield-check"></i></span>
+                        <span class="text">Roles</span>
                     </a>
                 </li>
                  </li>
