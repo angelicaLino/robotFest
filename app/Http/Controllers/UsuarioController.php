@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -11,15 +12,17 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::with('rol')->get();
+    return view('usuarios.index', compact('usuarios'));
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('usuarios.create'); // Vista para crear el usuario
     }
 
     /**
@@ -27,10 +30,29 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         
+        // Validación de los datos
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Crear el nuevo usuario
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+        ]);
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
+    
     }
 
     /**
+     * 
+     * 
+     * 
      * Display the specified resource.
      */
     public function show(string $id)

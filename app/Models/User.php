@@ -12,13 +12,17 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'estado',
-        'eliminado',
-        'rol_id',
+    'nombre',
+    'apellido',
+    'email',
+    'password',
+    'estado',
+    'eliminado',
+    'celular',
+    'foto',
+    'rol_id',
     ];
+
 
     protected $hidden = [
         'password',
@@ -39,3 +43,5 @@ class User extends Authenticatable
         return $this->belongsTo(Rol::class, 'rol_id');
     }
 }
+
+
