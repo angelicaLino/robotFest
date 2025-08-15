@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Title -->
-    <title> Edmate Learning Dashboard HTML Template</title>
+    <!-- Title --> 
+    <title> Edmate Learning Dashboard HTML Template </title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('assets_private/images/logo/favicon.png') }}">
     <!-- Bootstrap -->
@@ -100,11 +100,20 @@
 
                 <!-- Equipos -->
                 <li class="sidebar-menu__item">
-                    <a href="#" class="sidebar-menu__link">
+                    
+                    <a href="{{ route('equipos.index') }}" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-users-three"></i></span>
                         <span class="text">Equipos</span>
                     </a>
                 </li>
+
+                <li class="sidebar-menu__item">
+                     <a href="{{ route('categorias.index') }}" class="sidebar-menu__link">
+                         <span class="icon"><i class="ph ph-tags"></i></span>
+                         <span class="text">Categorías</span>
+                     </a>
+                </li>
+
 
                 <li class="sidebar-menu__item">
                     <a href="{{ route('usuarios.index')}}" class="sidebar-menu__link">
@@ -454,10 +463,10 @@
 
     </div>
 </div>
-           @yield('content')
 
-        
+  
         <div class="dashboard-body">
+           @yield('content')
             <div class="row gy-4">
                 <div class="col-lg-9">
                     <!-- Widgets Start -->

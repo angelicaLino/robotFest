@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-    'nombre',
+    'name',
     'apellido',
     'email',
     'password',
@@ -40,8 +40,17 @@ class User extends Authenticatable
     // Relación inversa: un usuario pertenece a un rol
     public function rol()
     {
-        return $this->belongsTo(Rol::class, 'rol_id');
+      return $this->belongsTo(Rol::class, 'rol_id');
     }
+
+
+    public function equipos()
+{
+    return $this->belongsToMany(Equipo::class, 'integrantes_equipo', 'user_id', 'equipo_id')
+                ->withPivot('rol_en_equipo')
+                ->withTimestamps();
+}
+
 }
 
 
