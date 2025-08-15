@@ -1,8 +1,7 @@
 @extends('layouts.private')
 @section('content')
 
- <div class="dashboard-body">
-            <div class="row gy-4">
+<div class="row gy-4">
                 <div class="col-lg-9">
                     <!-- Widgets Start -->
                     <div class="row gy-4">
@@ -324,5 +323,4 @@
                 </div>
 
             </div>
-        </div>
         @endsection

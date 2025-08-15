@@ -20,7 +20,8 @@ class UsersSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'docente@example.com'],
             [
-                'name' => 'Juan Docente',
+                'nombre' => 'Juan Docente',
+                'apellido' => '',
                 'password' => Hash::make('password123'),
                 'estado' => 'Activo',
                 'eliminado' => false,
@@ -31,7 +32,8 @@ class UsersSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@example.com'],
             [
-                'name' => 'Ana Administradora',
+                'nombre' => 'Ana Administradora',
+                'apellido' => '',
                 'password' => Hash::make('password123'),
                 'estado' => 'Activo',
                 'eliminado' => false,
@@ -42,7 +44,8 @@ class UsersSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'estudiante@example.com'],
             [
-                'name' => 'Pedro Estudiante',
+                'nombre' => 'Pedro Estudiante',
+                'apellido' => '',
                 'password' => Hash::make('password123'),
                 'estado' => 'Activo',
                 'eliminado' => false,
