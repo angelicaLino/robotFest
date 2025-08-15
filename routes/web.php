@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\CategoriaController;
-
+use App\Http\Controllers\InscripcionController;
 
 
 
@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('equipos', EquipoController::class);
     Route::resource('categorias', CategoriaController::class);
+    Route::resource('inscripciones', InscripcionController::class)->middleware('auth');
+
 });
 
 

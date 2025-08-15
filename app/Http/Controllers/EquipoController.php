@@ -12,40 +12,38 @@ class EquipoController extends Controller
     public function index()
     {
         $equipos = Equipo::with('categoria', 'integrantes')->get();
-        return view('equipos.index', compact('equipos'));
+        $categorias = Categoria::all();
+        return view('equipos.index', compact('equipos', 'categorias'));
     }
 
-    public function create()
-{
-    $categorias = Categoria::all();
-    $usuarios = \App\Models\User::all(); // Trae todos los usuarios
-    return view('equipos.create', compact('categorias', 'usuarios'));
-}
 
-public function store(Request $request)
-{
-    $request->validate([
-        'nombre' => 'required|string|max:255',
-        'categoria_id' => 'required|exists:categorias,id',
-        'integrantes' => 'required|array',
-        'integrantes.*' => 'exists:users,id',
-    ]);
-
-    // Crear equipo
-    $equipo = Equipo::create([
-        'nombre' => $request->nombre,
-        'categoria_id' => $request->categoria_id,
-    ]);
-
-    // Guardar integrantes
-    foreach($request->integrantes as $idusuario){
-        \App\Models\IntegranteEquipo::create([
-            'idusuario' => $idusuario,
-            'idequipo' => $equipo->id,
+        public function create()
+    {
+        $categorias = Categoria::all(); // Obtener todas las categorías
+        return view('equipos.create', compact('categorias'));
+    }   
+    
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'categoria_id' => 'required|exists:categorias,id',
         ]);
+
+        Equipo::create([
+            'nombre' => $request->nombre,
+            'categoria_id' => $request->categoria_id
+        ]);
+
+        return redirect()->route('equipos.index')->with('success', 'Equipo creado correctamente');
     }
 
-    return redirect()->route('equipos.index')->with('success', 'Equipo creado correctamente con sus integrantes');
-}
+    public function edit(Equipo $equipo)
+    {
+        $categorias = Categoria::all();
+        $usuarios = User::all();
+
+        return view('equipos.edit', compact('equipo', 'categorias', 'usuarios'));
+    }
 
 }

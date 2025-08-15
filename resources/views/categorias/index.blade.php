@@ -11,7 +11,6 @@
         <thead class="table-dark">
             <tr>
                 <th>Nombre</th>
-                <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -19,7 +18,6 @@
             @forelse($categorias as $categoria)
             <tr>
                 <td>{{ $categoria->nombre }}</td>
-                <td>{{ $categoria->descripcion ?? 'Sin descripción' }}</td>
                 <td class="d-flex gap-2">
                     <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-sm btn-warning">Editar</a>
                     <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display:inline-block;">
