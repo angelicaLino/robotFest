@@ -98,7 +98,7 @@
                     </div><!-- /.header-menu-wrap -->
                     <div class="header-right">
                         <div class="search-icon dl-search-icon"><i class="las la-search"></i></div>
-                        <a class="default-btn" href="{{ route('login') }}">Join Our Team</a>
+                        <a class="default-btn" href="{{ route('login') }}">Iniciar Sesión</a>
                         <!-- Burger menu -->
                         <div class="mobile-menu-icon">
                             <div class="burger-menu">

@@ -2,101 +2,96 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Rol;
+use App\Models\User; // Importamos el modelo User
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar la lista de usuarios
      */
     public function index()
     {
-        $usuarios = User::with('rol')->get();
-    return view('usuarios.index', compact('usuarios'));
+        $usuarios = User::all();
+        return view('usuarios.index', compact('usuarios'));
     }
 
-
     /**
-     * Show the form for creating a new resource.
+     * Mostrar el formulario de creación
      */
-   
     public function create()
     {
-        $roles = Rol::all(); // Trae todos los roles de la base de datos
-        return view('usuarios.create', compact('roles')); // Envía la variable $roles a la vista create
+        return view('usuarios.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guardar un nuevo usuario
      */
     public function store(Request $request)
-{
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'apellido' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'celular' => 'nullable|string|max:20',
-        'estado' => 'required|string',
-        'rol_id' => 'nullable|exists:roles,id',
-        'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        'password' => 'required|string|min:8|confirmed',
-    ]);
-
-    // Subir la foto si existe
-    if ($request->hasFile('foto')) {
-        $validated['foto'] = $request->file('foto')->store('fotos', 'public');
-    }
-
-    // Guardar usuario
-    User::create([
-        'name' => $validated['name'],
-        'apellido' => $validated['apellido'],
-        'email' => $validated['email'],
-        'celular' => $validated['celular'] ?? null,
-        'estado' => $validated['estado'],
-        'rol_id' => $validated['rol_id'],
-        'foto' => $validated['foto'] ?? null,
-        'password' => bcrypt($validated['password']),
-    ]);
-
-    return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
-}
-
-
-    /**
-     * 
-     * 
-     * 
-     * Display the specified resource.
-     */
-    public function show(string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostrar un usuario específico
      */
-    public function edit(string $id)
+    public function show($id)
     {
-        //
+        $usuario = User::findOrFail($id);
+        return view('usuarios.show', compact('usuario'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Mostrar el formulario de edición
      */
-    public function update(Request $request, string $id)
+    public function edit($id)
     {
-        //
+        $usuario = User::findOrFail($id);
+        return view('usuarios.edit', compact('usuario'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Actualizar un usuario
      */
-    public function destroy(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $usuario = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|unique:users,email,' . $usuario->id,
+            'password' => 'nullable|string|min:6|confirmed',
+        ]);
+
+        $usuario->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? bcrypt($request->password) : $usuario->password,
+        ]);
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado correctamente.');
+    }
+
+    /**
+     * Eliminar un usuario
+     */
+    public function destroy($id)
+    {
+        $usuario = User::findOrFail($id);
+        $usuario->delete();
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado correctamente.');
     }
 }
