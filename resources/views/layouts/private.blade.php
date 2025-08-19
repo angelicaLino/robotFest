@@ -116,7 +116,7 @@
 
 
                 <li class="sidebar-menu__item">
-                    <a href="{{ route('usuarios.index')}}" class="sidebar-menu__link">
+                    <a href="#" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-users"></i></span>
                         <span class="text">Usuarios</span>
                     </a>
