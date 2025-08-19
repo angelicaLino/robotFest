@@ -28,8 +28,8 @@ class User extends Authenticatable
     ];
 
     // 👇 Relación con Role
-    public function role()
+    public function rol()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Rol::class, 'rol_id');
     }
 }

@@ -10,7 +10,10 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('nombre')->unique();
+            $table->string('descripcion')->nullable();
+            $table->enum('estado', ['activo', 'inactivo', 'eliminado'])->default('activo');
+            $table->boolean('eliminado')->default(false);
             $table->timestamps();
         });
     }
