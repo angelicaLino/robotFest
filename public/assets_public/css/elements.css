@@ -19,13 +19,22 @@
 *  4.0 - Scroll Up
 */
 
+:root {
+  --color-primario: #0A3B7B;   /* Azul oscuro institucional */
+  --color-secundario: #FFD200; /* Amarillo dorado */
+  --color-blanco: #FFFFFF;     /* Blanco puro */
+  --color-fondo-suave: #F5F5F5;
+}
+
 /*** 1.0 - Common Styles ***/
 
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&display=swap');
 
 body {
-    background-color: #1b0e22;
+    background-color: #1E2A38;
+    /*
     background-image: url(../img/body-bg.jpg);
+    */
     background-repeat: repeat;
     background-position: 0 0;
     font-family: 'Oxanium', sans-serif;
@@ -411,7 +420,7 @@ body.loaded{
 }
 
 .dl-cursor:before {
-    background: #9841ff;
+    background: var(--color-secundario);
     opacity: 0.5;
     content: "";
     width: 100%;
@@ -454,8 +463,8 @@ body.loaded{
 }
 
 .default-btn {
-    background: #f90cff;
-    background-image: linear-gradient(to right bottom, #f90cff, #e027ff, #c534ff, #a93eff, #8a44ff, #6560ff, #3c73ff, #0081ff, #009cff, #00b3ff, #00c6f5, #0cd7e8);
+    background: #FFD700; /* Amarillo dorado */
+    background-image: linear-gradient(to right bottom, #FFD700, #FFC107, #FFB300, #FFA000, #FF8F00);
     clip-path: polygon(0% 0%, 90% 0, 100% 30%, 100% 100%, 0 100%);
     color: #fff;
     font-family: 'Oxanium', sans-serif;
@@ -486,7 +495,7 @@ body.loaded{
 }
 
 .default-btn span {
-    background: #9841ff none repeat scroll 0 0;
+    
     border-radius: 50%;
     display: block;
     width: 0;
