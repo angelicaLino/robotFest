@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('password');
             $table->foreignId('rol_id')->nullable()->constrained('roles')->onDelete('set null');
             $table->string('imagen')->nullable();
-            $table->enum('estado', ['activo', 'inactivo', 'suspendido'])->default('activo');
+            $table->enum('estado', ['activo', 'inactivo', 'eliminado'])->default('activo');
             $table->boolean('eliminado')->default(false);
             $table->rememberToken();
             $table->timestamps();

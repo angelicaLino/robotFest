@@ -21,7 +21,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $roles = Rol::all(); // Trae todos los roles
+        $roles = User::all(); // Trae todos los roles
         return view('usuarios.create', compact('roles')); // Pasa los roles a la vista
     }
     /**
@@ -85,14 +85,49 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado correctamente.');
     }
 
-    /**
-     * Eliminar un usuario
-     */
+    //Proceso Eliminacion Logica
     public function destroy($id)
     {
-        $usuario = User::findOrFail($id);
-        $usuario->delete();
+        $user = User::findOrFail($id);
+        
+        if ($user->id === 1 || $user->id === 2) {
+            return redirect()->route('usuarios.index')->with('error', 'No se puede eliminar usuarios Administrador, Estudiante y Jurado.');
+        }
+
+        // Eliminar lógicamente
+        $user->eliminado = true;
+        $user->save();
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado correctamente.');
+    }
+
+    //Proceso Restaurar
+    public function restore($id)
+    {
+        $user = User::findOrFail($id);
+
+        if (!$user->eliminado) {
+            return redirect()->route('usuarios.index')->with('info', 'El usuario ya está activo.');
+        }
+
+        $user->eliminado = false;
+        $user->save();
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario restaurado correctamente.');
+    }
+
+    //Proceso Eliminacion Permanente o Fisica
+    public function delete($id)
+    {
+        $user = User::find($id);
+
+        if ($user->id === 1 || $user->id === 2) {
+            return redirect()->route('usuarios.index')->with('error', 'No se puede eliminar usuarios Administrador y Responsable.');
+        }
+
+        // Eliminar permanentemente
+        $user->delete();
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado permanentemente.');
     }
 }

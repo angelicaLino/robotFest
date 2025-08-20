@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
 
     // USUARIOS
     Route::resource('usuarios', UsuarioController::class);
+    Route::put('/usuarios/{id}/restore', [UsuarioController::class, 'restore'])->name('usuarios.restore');
+    Route::post('/usuarios/{id}/delete', [UsuarioController::class, 'delete'])->name('usuarios.delete');
 
     // EQUIPOS
     Route::resource('equipos', App\Http\Controllers\EquipoController::class);

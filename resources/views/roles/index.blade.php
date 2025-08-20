@@ -181,16 +181,16 @@
             <div class="modal-content">
                 <div class="modal-body p-5 text-center">
                     <i data-lucide="alert-triangle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
-                    <div class="text-2xl mt-5">¿Eliminar Rol Permanentemente?</div>
+                    <div class="text-2xl mt-5">¿Eliminar Registro Permanentemente?</div>
                     <div class="text-slate-500 mt-2">
-                        Estás a punto de eliminar el rol <span id="name" class="font-bold"></span>.
+                        Estás a punto de eliminar el registro <span id="name" class="font-bold"></span>.
                         <br>
                         Esta acción no se puede deshacer.
                     </div>
                 </div>
                 <div class="modal-footer text-center">
                     <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24">Cancelar</button>
-                    <form id="delete-rol-form" method="POST" class="inline-block">
+                    <form id="delete-permanent-form" method="POST" class="inline-block">
                         @csrf
                         <button type="submit" class="btn btn-danger w-24">Eliminar</button>
                     </form>
@@ -230,7 +230,7 @@
 @section('script')
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const baseDeleteUrl = {!! json_encode(url('/roles')) !!};
+            const baseUrl = {!! json_encode(url('/roles')) !!};
 
             // Eliminar
             const deleteButtons = document.querySelectorAll(".btn-delete");
@@ -239,25 +239,24 @@
             deleteButtons.forEach(button => {
                 button.addEventListener("click", () => {
                     const dataId = button.getAttribute("data-id");
-                    deleteForm.setAttribute("action", `${baseDeleteUrl}/${dataId}`);
+                    deleteForm.setAttribute("action", `${baseUrl}/${dataId}`);
                 });
             });
 
             // Restaurar
             const restoreButtons = document.querySelectorAll(".btn-restore");
             const restoreForm = document.getElementById("restore-form");
-            const baseRestoreUrl = {!! json_encode(url('/roles')) !!};
 
             restoreButtons.forEach(button => {
                 button.addEventListener("click", () => {
                     const dataId = button.getAttribute("data-id");
-                    restoreForm.setAttribute("action", `${baseRestoreUrl}/${dataId}/restore`);
+                    restoreForm.setAttribute("action", `${baseUrl}/${dataId}/restore`);
                 });
             });
 
             // Eliminacion Permanentemente
-            const deletePermanentButtons = document.querySelectorAll(".btn-delete-permanent"); // cambiar clase
-            const deletePermanentForm = document.getElementById("delete-rol-form");
+            const deletePermanentButtons = document.querySelectorAll(".btn-delete-permanent");
+            const deletePermanentForm = document.getElementById("delete-permanent-form");
             const nameSpan = document.getElementById("name");
 
             deletePermanentButtons.forEach(button => {
@@ -269,7 +268,7 @@
                     nameSpan.textContent = dataName;
 
                     // Cambiar la acción del form al endpoint correcto
-                    deletePermanentForm.setAttribute("action", `${baseDeleteUrl}/${dataId}/delete`);
+                    deletePermanentForm.setAttribute("action", `${baseUrl}/${dataId}/delete`);
                 });
             });
         });
