@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\RoleController;
-
+use App\Http\Controllers\RolController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,9 +33,12 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Gestión de roles
-    Route::resource('roles', RoleController::class);
+    // ROLES
+    Route::resource('roles', RolController::class)->parameters(['roles' => 'rol']);
+    Route::put('/roles/{id}/restore', [RolController::class, 'restore'])->name('roles.restore');
+    Route::post('/roles/{id}/delete', [RolController::class, 'delete'])->name('roles.delete');
 
-    // Gestión de usuarios
+
+    // USUARIOS
     Route::resource('usuarios', UsuarioController::class);
 });

@@ -36,63 +36,51 @@
                     <tr>
                         <th class="fw-semibold text-gray-600">Nro.</th>
                         <th class="fw-semibold text-gray-600">Nombre</th>
-                        <th class="fw-semibold text-gray-600">Descripción</th>
-                        <th class="fw-semibold text-gray-600">Estado</th>
+                        <th class="fw-semibold text-gray-600">Correo</th>
+                        <th class="fw-semibold text-gray-600">Rol</th>
                         <th class="fw-semibold text-gray-600">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($roles as $rol)
+                    @foreach ($usuarios as $usuario)
                         <tr>
                             <td>
-                                <span class="h6 mb-0 fw-medium text-gray-300">{{ $rol->id }}</span>
+                                <span class="h6 mb-0 fw-medium text-gray-300">{{ $usuario->id }}</span>
                             </td>
                             <td>
                                 <div class="flex-align gap-8">
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $rol->nombre }}</span>
+                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $usuario->name }}</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="flex-align gap-8">
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $rol->descripcion }}</span>
+                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $usuario->email }}</span>
                                 </div>
                             </td>
                             <td>
-                                @php
-                                    $estado = $rol->eliminado ? 'eliminado' : $rol->estado;
-                                    $clases = match ($estado) {
-                                        'activo' => 'bg-success-50 text-success-600',
-                                        'inactivo' => 'bg-warning-50 text-warning-600',
-                                        'suspendido' => 'bg-danger-50 text-danger-600',
-                                        'eliminado' => 'bg-danger-50 text-danger-600',
-                                        default => 'bg-secondary text-white',
-                                    };
-                                @endphp
-
-                                <span
-                                    class="text-13 py-6 px-10 fw-bold {{ $clases }} d-inline-flex align-items-center gap-8 rounded-pill">
-                                    {{ ucfirst($estado) }}
-                                </span>
+                                <div class="flex-align gap-8">
+                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $usuario->rol->nombre }}</span>
+                                </div>
                             </td>
                             <td>
-                                @if ($rol->eliminado)
+                                @if ($usuario->eliminado)
                                     {{-- Botón restaurar --}}
-                                    <a href="{{ route('roles.show', $rol) }}" class="btn btn-primary" title="Ver rol">
+                                    <a href="{{ route('usuarios.show', $usuario) }}" class="btn btn-primary" title="Ver rol">
                                         <i data-lucide="eye" class="w-4 h-4 mr-2"></i> Ver
                                     </a>
-                                    <a href="javascript:;" class="btn btn-success btn-restore" data-id="{{ $rol->id }}"
+                                    <a href="javascript:;" class="btn btn-success btn-restore" data-id="{{ $usuario->id }}"
                                         data-tw-toggle="modal" data-tw-target="#restore-confirmation-modal">
                                         <i data-lucide="rotate-ccw" class="w-4 h-4 mr-2"></i> Restaurar
                                     </a>
-                                    <a href="javascript:;" class="btn btn-danger btn-delete-permanent" data-id="{{ $rol->id }}"
-                                        data-name="{{ $rol->nombre }}" data-tw-toggle="modal"
+                                    <a href="javascript:;" class="btn btn-danger btn-delete-permanent" data-id="{{ $usuario->id }}"
+                                        data-name="{{ $usuario->nombre }}" data-tw-toggle="modal"
                                         data-tw-target="#delete-permanentemente-confirmation-modal">
                                         <i data-lucide="trash-2" class="w-4 h-4 mr-2"></i> Eliminar Permanentemente
                                     </a>
                                 @else
                                     {{-- Botones normales --}}
                                     <div class="d-flex align-items-center gap-2 flex-wrap">
-                                        <a href="{{ route('roles.edit', $rol) }}"
+                                        <a href="{{ route('usuarios.edit', $usuario) }}"
                                             class="btn btn-primary text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2">
                                             <i class="ph ph-pencil me-4"></i>
                                             Editar
@@ -100,7 +88,7 @@
 
                                         <a href="javascript:;" 
                                             class="btn btn-danger btn-delete text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2"
-                                            data-id="{{ $rol->id }}" 
+                                            data-id="{{ $usuario->id }}" 
                                             data-tw-toggle="modal" 
                                             data-tw-target="#delete-confirmation-modal">
                                             <i class="ph ph-trash me-4"></i>

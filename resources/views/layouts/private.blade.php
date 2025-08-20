@@ -16,7 +16,7 @@
     <!-- file upload -->
     <link rel="stylesheet" href="{{ asset('assets_private/css/plyr.css') }}">
     <!-- DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <!-- full calendar -->
     <link rel="stylesheet" href="{{ asset('assets_private/css/full-calendar.css') }}">
     <!-- jquery Ui -->
@@ -66,28 +66,28 @@
                     @if (Auth::user()->rol->nombre == 'Administrador')
 
                         <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
+                            <a href="{{ route('dashboard') }}" class="sidebar-menu__link {{ request()->routeIs('dashboard') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-squares-four"></i></span>
                                 <span class="text">Panel Principal</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
+                            <a href="{{ route('usuarios.index') }}" class="sidebar-menu__link {{ request()->routeIs('usuarios.*') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-user-circle"></i></span>
                                 <span class="text">Usuarios</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="mentors.html" class="sidebar-menu__link">
+                            <a href="{{ route('roles.index') }}" class="sidebar-menu__link {{ request()->routeIs('roles.*') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-shield-check"></i></span>
                                 <span class="text">Roles</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
+                            <a href="#" class="sidebar-menu__link {{ request()->routeIs('equipos.*') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-users-three"></i></span>
                                 <span class="text">Equipos</span>
                             </a>
@@ -472,8 +472,8 @@
 
         <div class="dashboard-body">
             @yield('content')
-
         </div>
+
         <div class="dashboard-footer">
             <div class="flex-between flex-wrap gap-16">
                 <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright Edmate 2024, All Right Reserverd</p>
@@ -503,7 +503,7 @@
     <!-- file upload -->
     <script src="{{ asset('assets_private/js/plyr.js') }}"></script>
     <!-- dataTables -->
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <!-- full calendar -->
     <script src="{{ asset('assets_private/js/full-calendar.js') }}"></script>
     <!-- jQuery UI -->
@@ -523,8 +523,23 @@
     <script src="{{ asset('assets_private/js/main.js') }}"></script>
 
 
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                language: {
+                    url: "{{ asset('assets_private/json/es-ES.json') }}"
+                },
+                responsive: true,
+                pageLength: 10,
+                initComplete: function () {
+                    $('.datatable').removeClass('datatable-loading');
+                }
+            });
+        });
+    </script>
 
-
+ @yield('script')
+ 
     <script>
         function createChart(chartId, chartColor) {
 
@@ -823,61 +838,9 @@
         chart.render();
         // ================================= Multiple Radial Bar Chart End =============================
 
-        // ========================== Export Js Start ==============================
-        document.getElementById('exportOptions').addEventListener('change', function () {
-            const format = this.value;
-            const table = document.getElementById('studentTable');
-            let data = [];
-            const headers = [];
-
-            // Get the table headers
-            table.querySelectorAll('thead th').forEach(th => {
-                headers.push(th.innerText.trim());
-            });
-
-            // Get the table rows
-            table.querySelectorAll('tbody tr').forEach(tr => {
-                const row = {};
-                tr.querySelectorAll('td').forEach((td, index) => {
-                    row[headers[index]] = td.innerText.trim();
-                });
-                data.push(row);
-            });
-
-            if (format === 'csv') {
-                downloadCSV(data);
-            } else if (format === 'json') {
-                downloadJSON(data);
-            }
-        });
-
-        function downloadCSV(data) {
-            const csv = data.map(row => Object.values(row).join(',')).join('\n');
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'students.csv';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-
-        function downloadJSON(data) {
-            const json = JSON.stringify(data, null, 2);
-            const blob = new Blob([json], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'students.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-        // ========================== Export Js End ==============================
-
     </script>
 
+   
 
 </body>
 
