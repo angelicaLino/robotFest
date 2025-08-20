@@ -55,8 +55,8 @@
         <!-- sidebar close btn -->
 
         <a href="index.html"
-            class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
-            <img src="{{ asset('assets_private/images/logo/selloemi.png') }}" alt="Logo">
+            class="sidebar__logo text-center p-30 position-sticky inset-block-start-0 bg-white w-94 z-1 pb-9">
+            <img src="{{ asset('assets_private/images/logo/EMInuevo.png') }}" alt="Logo">
         </a>
 
         <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">
@@ -74,8 +74,15 @@
 
                         <li class="sidebar-menu__item">
                             <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-graduation-cap"></i></span>
-                                <span class="text">Cursos</span>
+                                <span class="icon"><i class="ph ph-user-circle"></i></span>
+                                <span class="text">Usuarios</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-menu__item">
+                            <a href="mentors.html" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-shield-check"></i></span>
+                                <span class="text">Roles</span>
                             </a>
                         </li>
 
@@ -88,78 +95,69 @@
 
                         <li class="sidebar-menu__item">
                             <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-users"></i></span>
-                                <span class="text">Usuarios</span>
+                                <span class="icon"><i class="ph ph-user-list"></i></span>
+                                <span class="text">Integrantes de Equipos</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="mentors.html" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-shield-check"></i></span>
-                                <span class="text">Roles</span>
-                            </a>
-                        </li>
-                        </li>
-
-                        <li class="sidebar-menu__item">
-                            <a href="assignment.html" class="sidebar-menu__link">
+                            <a href="#" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-clipboard-text"></i></span>
-                                <span class="text">Assignments</span>
+                                <span class="text">Inscripciones</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="resources.html" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-bookmarks"></i></span>
-                                <span class="text">Resources</span>
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-calendar"></i></span>
+                                <span class="text">Eventos</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="message.html" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-chats-teardrop"></i></span>
-                                <span class="text">Messages</span>
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-tag"></i></span>
+                                <span class="text">Categorias</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="analytics.html" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-chart-bar"></i></span>
-                                <span class="text">Analytics</span>
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-trophy"></i></span>
+                                <span class="text">Competencias</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="event.html" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-calendar-dots"></i></span>
-                                <span class="text">Events</span>
+                             <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-arrows-left-right"></i></span>
+                                <span class="text">Enfrentamientos</span>
+                             </a>
+                        </li>
+
+                        <li class="sidebar-menu__item">
+                                <a href="#" class="sidebar-menu__link">
+                                    <span class="icon"><i class="ph ph-circle-wavy"></i></span>
+                                    <span class="text">Rondas</span>
+                                </a>
+                         </li>
+
+
+                        <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-users-three"></i></span>
+                                <span class="text">Docentes</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="library.html" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-books"></i></span>
-                                <span class="text">Library</span>
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-graduation-cap"></i></span>
+                                <span class="text">Cursos</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-menu__item">
-                            <a href="pricing-plan.html" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-coins"></i></span>
-                                <span class="text">Pricing</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-menu__item">
-                            <span class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Settings</span>
-                        </li>
-
-                        <li class="sidebar-menu__item">
-                            <a href="setting.html" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-gear"></i></span>
-                                <span class="text">Account Settings</span>
-                            </a>
-                        </li>
+                    
 
                         <li class="sidebar-menu__item has-dropdown">
                             <a href="javascript:void(0)" class="sidebar-menu__link">
@@ -171,10 +169,91 @@
                     @endif
 
                     @if (Auth::user()->rol->nombre == 'Estudiante')
+
+                    <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-user-circle"></i></span>
+                                <span class="text">Usuarios</span>
+                            </a>
+                    </li>
+
+                    <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-users-three"></i></span>
+                                <span class="text">Equipos</span>
+                            </a>
+                    </li>
+
                     
+                    <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-clipboard-text"></i></span>
+                                <span class="text">Inscripciones</span>
+                            </a>
+                    </li>
+
+                    <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-calendar"></i></span>
+                                <span class="text">Eventos</span>
+                            </a>
+                    </li>
+
+                    <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-trophy"></i></span>
+                                <span class="text">Competencias</span>
+                            </a>
+                    </li>
+
+                     <li class="sidebar-menu__item">
+                                <a href="#" class="sidebar-menu__link">
+                                    <span class="icon"><i class="ph ph-circle-wavy"></i></span>
+                                    <span class="text">Rondas</span>
+                                </a>
+                         </li>
+
+
                     @endif
 
                     @if (Auth::user()->rol->nombre == 'Jurado')
+
+                    <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-calendar"></i></span>
+                                <span class="text">Eventos</span>
+                            </a>
+                    </li>
+
+                    <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-trophy"></i></span>
+                                <span class="text">Competencias</span>
+                            </a>
+                    </li>
+
+                    <li class="sidebar-menu__item">
+                             <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-arrows-left-right"></i></span>
+                                <span class="text">Enfrentamientos</span>
+                             </a>
+                        </li>
+
+                        <li class="sidebar-menu__item">
+                                <a href="#" class="sidebar-menu__link">
+                                    <span class="icon"><i class="ph ph-circle-wavy"></i></span>
+                                    <span class="text">Rondas</span>
+                                </a>
+                         </li>
+
+                         <li class="sidebar-menu__item">
+                                <a href="#" class="sidebar-menu__link">
+                                    <span class="icon"><i class="ph ph-check-square"></i></span>
+                                    <span class="text">Evaluaciones</span>
+                                </a>
+                         </li>
+
+
 
                     @endif
 

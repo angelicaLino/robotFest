@@ -43,7 +43,7 @@
                 <div class="primary-header-inner">
                     <div class="header-logo">
                         <a href="index.html">
-                            <img class="logo" src="{{ asset('assets_public/img/logoRobot.jpg')}}" alt="Logo">
+                            <img class="logo" src="{{ asset('assets_public/img/EMInuevo.png')}}" alt="Logo">
                         </a>
                     </div><!-- /.header-logo -->
                     <div class="header-menu-wrap">
