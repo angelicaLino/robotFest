@@ -79,13 +79,6 @@
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="{{ route('usuarios.index') }}" class="sidebar-menu__link {{ request()->routeIs('usuarios.*') ? 'activePage' : '' }}">
-                                <span class="icon"><i class="ph ph-user-circle"></i></span>
-                                <span class="text">Usuarios</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-menu__item">
                             <a href="{{ route('roles.index') }}" class="sidebar-menu__link {{ request()->routeIs('roles.*') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-shield-check"></i></span>
                                 <span class="text">Roles</span>
@@ -93,28 +86,14 @@
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="{{ route('equipos.index') }}" class="sidebar-menu__link {{ request()->routeIs('equipos.*') ? 'activePage' : '' }}">
-                                <span class="icon"><i class="ph ph-users-three"></i></span>
-                                <span class="text">Equipos</span>
+                            <a href="{{ route('usuarios.index') }}" class="sidebar-menu__link {{ request()->routeIs('usuarios.*') ? 'activePage' : '' }}">
+                                <span class="icon"><i class="ph ph-user-circle"></i></span>
+                                <span class="text">Usuarios</span>
                             </a>
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-user-list"></i></span>
-                                <span class="text">Integrantes de Equipos</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-clipboard-text"></i></span>
-                                <span class="text">Inscripciones</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
+                            <a href="{{ route('eventos.index') }}" class="sidebar-menu__link {{ request()->routeIs('eventos.*') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-calendar"></i></span>
                                 <span class="text">Eventos</span>
                             </a>
@@ -128,11 +107,40 @@
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
+                            <a href="{{ route('competencias.index') }}" class="sidebar-menu__link {{ request()->routeIs(patterns: 'competencias.*') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-trophy"></i></span>
                                 <span class="text">Competencias</span>
                             </a>
                         </li>
+
+
+                        <li class="sidebar-menu__item">
+                            <a href="{{ route('equipos.index') }}" class="sidebar-menu__link {{ request()->routeIs('equipos.*') ? 'activePage' : '' }}">
+                                <span class="icon"><i class="ph ph-users-three"></i></span>
+                                <span class="text">Equipos</span>
+                            </a>
+                        </li>
+<!--
+                        <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-user-list"></i></span>
+                                <span class="text">Integrantes de Equipos</span>
+                            </a>
+                        </li>
+                    -->
+
+                        <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-clipboard-text"></i></span>
+                                <span class="text">Inscripciones</span>
+                            </a>
+                        </li>
+
+                        
+
+                        
+
+                        
 
                         <li class="sidebar-menu__item">
                              <a href="#" class="sidebar-menu__link">
@@ -164,13 +172,14 @@
                         </li>
 
                     
-
+<!--
                         <li class="sidebar-menu__item has-dropdown">
                             <a href="javascript:void(0)" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-shield-check"></i></span>
                                 <span class="text">Authetication</span>
                             </a>
                         </li>
+                    -->
 
                     @endif
 

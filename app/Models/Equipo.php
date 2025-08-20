@@ -10,8 +10,26 @@ class Equipo extends Model
     use HasFactory;
 
     protected $fillable = [
+        'competencia_id',
         'nombre',
-        'descripción',
-        'logo',
+        'descripcion',
+        'estado',
+        'eliminado',
     ];
+
+    /**
+     * Relación: Un equipo pertenece a una competencia
+     */
+    public function competencia()
+    {
+        return $this->belongsTo(Competencia::class);
+    }
+
+    /**
+     * Relación: Un equipo tiene muchos integrantes
+     */
+    public function integrantes()
+    {
+        return $this->hasMany(IntegranteEquipo::class);
+    }
 }

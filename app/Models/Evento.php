@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Evento extends Model
 {
     use HasFactory;
 
-    protected $table = 'categorias';
+    protected $table = 'eventos';
 
     protected $fillable = [
-        'nombre',
-        'descripcion',
-        'estado',
-        'eliminado',
+        'nombre', 
+        'descripcion', 
+        'fecha', 
+        'estado', 
+        'eliminado'
     ];
 
     public function competencias()

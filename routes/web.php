@@ -47,6 +47,14 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/categorias/{id}/restore', [CategoriaController::class, 'restore'])->name('categorias.restore');
     Route::post('/categorias/{id}/delete', [CategoriaController::class, 'delete'])->name('categorias.delete');
 
+
+    // EVENTOS
+    Route::resource('eventos', App\Http\Controllers\EventoController::class);
+
+    // COMPETENCIAS
+    Route::resource('competencias', App\Http\Controllers\CompetenciaController::class);
+
+    
     // EQUIPOS
     Route::resource('equipos', App\Http\Controllers\EquipoController::class);
 

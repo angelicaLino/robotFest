@@ -13,14 +13,14 @@
 
                 <li><span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
 
-                <li><span class="text-main-600 fw-normal text-15">Equipos</span></li>
+                <li><span class="text-main-600 fw-normal text-15">Eventos</span></li>
             </ul>
         </div>
         <!-- Breadcrumb End -->
 
         <!-- Breadcrumb Right Start -->
         <div class="d-flex align-items-center gap-2 flex-wrap">
-            <a href="{{ route('equipos.create') }}"
+            <a href="{{ route('eventos.create') }}"
                 class="btn btn-primary text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2">
                 <i class="ph ph-plus me-4"></i>
                 Agregar
@@ -28,7 +28,6 @@
         </div>
         <!-- Breadcrumb Right End -->
     </div>
-
 
     {{-- Mensaje de error --}}
     @if (session('error'))
@@ -59,36 +58,36 @@
                     <tr>
                         <th class="fw-semibold text-gray-600">Nro.</th>
                         <th class="fw-semibold text-gray-600">Nombre</th>
-                        <th class="fw-semibold text-gray-600">Competencia</th>
-                        <th class="fw-semibold text-gray-600">Miembros</th>
+                        <th class="fw-semibold text-gray-600">Descripción</th>
+                        <th class="fw-semibold text-gray-600">Fecha</th>
                         <th class="fw-semibold text-gray-600">Estado</th>
                         <th class="fw-semibold text-gray-600">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($equipos as $equipo)
+                    @foreach ($eventos as $evento)
                         <tr>
                             <td>
-                                <span class="h6 mb-0 fw-medium text-gray-300">{{ $equipo->id }}</span>
+                                <span class="h6 mb-0 fw-medium text-gray-300">{{ $evento->id }}</span>
                             </td>
                             <td>
                                 <div class="flex-align gap-8">
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $equipo->nombre }}</span>
+                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $evento->nombre }}</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="flex-align gap-8">
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $equipo->competencia->nombre }}</span>
+                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $evento->descripcion }}</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="flex-align gap-8">
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $equipo->integrantes->count() }}</span>
+                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $evento->fecha }}</span>
                                 </div>
                             </td>
                             <td>
                                 @php
-                                    $estado = $equipo->eliminado ? 'eliminado' : $equipo->estado;
+                                    $estado = $evento->eliminado ? 'eliminado' : $evento->estado;
                                     $clases = match ($estado) {
                                         'activo' => 'bg-success-50 text-success-600',
                                         'inactivo' => 'bg-warning-50 text-warning-600',
@@ -105,23 +104,23 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-start gap-2">
-                                    @if ($equipo->eliminado)
+                                    @if ($evento->eliminado)
                                         {{-- Botón restaurar --}}
-                                        <a href="{{ route('equipos.show', $equipo) }}"
+                                        <a href="{{ route('eventos.show', $evento) }}"
                                             class="btn btn-primary text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2">
                                             <i class="ph ph-eye me-4"></i>
                                             Ver
                                         </a>
                                         <a href="javascript:;"
                                             class="btn btn-success btn-restore text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2"
-                                            data-id="{{ $equipo->id }}" data-bs-toggle="modal"
+                                            data-id="{{ $evento->id }}" data-bs-toggle="modal"
                                             data-bs-target="#restore-confirmation-modal">
                                             <i class="ph ph-arrow-counter-clockwise me-4"></i>
                                             Restaurar
                                         </a>
                                         <a href="javascript:;"
                                             class="btn btn-danger btn-delete-permanent text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2"
-                                            data-id="{{ $equipo->id }}" data-name="{{ $equipo->nombre }}" data-bs-toggle="modal"
+                                            data-id="{{ $evento->id }}" data-name="{{ $evento->nombre }}" data-bs-toggle="modal"
                                             data-bs-target="#delete-permanentemente-confirmation-modal">
                                             <i class="ph ph-trash me-4"></i>
                                             Eliminar
@@ -129,7 +128,7 @@
                                     @else
                                         {{-- Botones normales --}}
 
-                                        <a href="{{ route('equipos.edit', $equipo) }}"
+                                        <a href="{{ route('eventos.edit', $evento) }}"
                                             class="btn btn-primary text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2">
                                             <i class="ph ph-pencil me-4"></i>
                                             Editar
@@ -137,7 +136,7 @@
 
                                         <a href="javascript:;"
                                             class="btn btn-danger btn-delete text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2"
-                                            data-id="{{ $equipo->id }}" data-bs-toggle="modal"
+                                            data-id="{{ $evento->id }}" data-bs-toggle="modal"
                                             data-bs-target="#delete-confirmation-modal">
                                             <i class="ph ph-trash me-4"></i>
                                             Eliminar
@@ -230,7 +229,7 @@
 @section('script')
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const baseUrl = {!! json_encode(url('/equipos')) !!};
+            const baseUrl = {!! json_encode(url('/eventos')) !!};
 
             // Eliminar
             const deleteButtons = document.querySelectorAll(".btn-delete");

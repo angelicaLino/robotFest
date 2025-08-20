@@ -50,5 +50,29 @@ class UsersSeeder extends Seeder
             'estado' => 'activo',
             'eliminado' => false
         ]);
+
+
+        // 6 estudiantes adicionales
+        $nuevos_estudiantes = [
+            ['name' => 'Leonardo', 'last_name' => 'Ayaviri', 'email' => 'estudiante1@example.com'],
+            ['name' => 'Angelica', 'last_name' => 'Lino', 'email' => 'estudiante2@example.com'],
+            ['name' => 'Cristian', 'last_name' => 'Sanchez', 'email' => 'estudiante3@example.com'],
+            ['name' => 'Alvaro', 'last_name' => 'Cuba', 'email' => 'estudiante4@example.com'],
+            ['name' => 'Juan', 'last_name' => 'Castedo', 'email' => 'estudiante5@example.com'],
+            ['name' => 'Jorge', 'last_name' => 'Alvarado', 'email' => 'estudiante6@example.com'],
+        ];
+
+        foreach ($nuevos_estudiantes as $estudiante_data) {
+            User::create([
+                'name' => $estudiante_data['name'],
+                'last_name' => $estudiante_data['last_name'],
+                'email' => $estudiante_data['email'],
+                'rol_id' => $estudiante->id,
+                'password' => Hash::make('estudiante123'),
+                'imagen' => null,
+                'estado' => 'activo',
+                'eliminado' => false
+            ]);
+        }
     }
 }
