@@ -5,11 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
+use App\Http\Controllers\EquipoController;
 
 // Página de inicio pública
 Route::get('/', function () {
@@ -41,4 +37,8 @@ Route::middleware(['auth'])->group(function () {
 
     // USUARIOS
     Route::resource('usuarios', UsuarioController::class);
+
+    // EQUIPOS
+    Route::resource('equipos', App\Http\Controllers\EquipoController::class);
+
 });

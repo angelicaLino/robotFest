@@ -21,9 +21,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        $roles = Rol::all(); // Trae todos los roles
+        return view('usuarios.create', compact('roles')); // Pasa los roles a la vista
     }
-
     /**
      * Guardar un nuevo usuario
      */
@@ -43,6 +43,7 @@ class UsuarioController extends Controller
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
     }
+
 
     /**
      * Mostrar un usuario específico

@@ -87,7 +87,7 @@
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link {{ request()->routeIs('equipos.*') ? 'activePage' : '' }}">
+                            <a href="{{ route('equipos.index') }}" class="sidebar-menu__link {{ request()->routeIs('equipos.*') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-users-three"></i></span>
                                 <span class="text">Equipos</span>
                             </a>

@@ -17,6 +17,7 @@ class User extends Authenticatable
         'password',
         'role_id', // 👈 importante para poder asignar el rol
     ];
+    
 
     protected $hidden = [
         'password',

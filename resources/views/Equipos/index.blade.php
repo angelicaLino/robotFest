@@ -13,14 +13,14 @@
 
                 <li><span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
 
-                <li><span class="text-main-600 fw-normal text-15">Roles</span></li>
+                <li><span class="text-main-600 fw-normal text-15">Equipos</span></li>
             </ul>
         </div>
         <!-- Breadcrumb End -->
 
         <!-- Breadcrumb Right Start -->
         <div class="d-flex align-items-center gap-2 flex-wrap">
-            <a href="{{ route('usuarios.create') }}"
+            <a href="{{ route('equipos.create') }}"
                 class="btn btn-primary text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2">
                 <i class="ph ph-plus me-4"></i>
                 Agregar
@@ -36,51 +36,51 @@
                     <tr>
                         <th class="fw-semibold text-gray-600">Nro.</th>
                         <th class="fw-semibold text-gray-600">Nombre</th>
-                        <th class="fw-semibold text-gray-600">Correo</th>
-                        <th class="fw-semibold text-gray-600">Rol</th>
-                        <th class="fw-semibold text-gray-600">Acciones</th>
+                        <th class="fw-semibold text-gray-600">Descripción</th>
+                        <th class="fw-semibold text-gray-600">Categoria</th>
+                        <th class="fw-semibold text-gray-600">Integrantes</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($usuarios as $usuario)
+                    @foreach ($equipos as $equipo)
                         <tr>
                             <td>
-                                <span class="h6 mb-0 fw-medium text-gray-300">{{ $usuario->id }}</span>
+                                <span class="h6 mb-0 fw-medium text-gray-300">{{ $equipo->id }}</span>
                             </td>
                             <td>
                                 <div class="flex-align gap-8">
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $usuario->name }}</span>
+                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $equipo->name }}</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="flex-align gap-8">
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $usuario->email }}</span>
+                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $equipo->descripción }}</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="flex-align gap-8">
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $usuario->rol->nombre }}</span>
+                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $equipo->categoria->nombre }}</span>
                                 </div>
                             </td>
                             <td>
-                                @if ($usuario->eliminado)
+                                @if ($equipo->eliminado)
                                     {{-- Botón restaurar --}}
-                                    <a href="{{ route('usuarios.show', $usuario) }}" class="btn btn-primary" title="Ver rol">
+                                    <a href="{{ route('equipo.show', $equipo) }}" class="btn btn-primary" title="Ver rol">
                                         <i data-lucide="eye" class="w-4 h-4 mr-2"></i> Ver
                                     </a>
-                                    <a href="javascript:;" class="btn btn-success btn-restore" data-id="{{ $usuario->id }}"
+                                    <a href="javascript:;" class="btn btn-success btn-restore" data-id="{{ $equipo->id }}"
                                         data-tw-toggle="modal" data-tw-target="#restore-confirmation-modal">
                                         <i data-lucide="rotate-ccw" class="w-4 h-4 mr-2"></i> Restaurar
                                     </a>
-                                    <a href="javascript:;" class="btn btn-danger btn-delete-permanent" data-id="{{ $usuario->id }}"
-                                        data-name="{{ $usuario->nombre }}" data-tw-toggle="modal"
+                                    <a href="javascript:;" class="btn btn-danger btn-delete-permanent" data-id="{{ $equipo->id }}"
+                                        data-name="{{ $equipo->nombre }}" data-tw-toggle="modal"
                                         data-tw-target="#delete-permanentemente-confirmation-modal">
                                         <i data-lucide="trash-2" class="w-4 h-4 mr-2"></i> Eliminar Permanentemente
                                     </a>
                                 @else
                                     {{-- Botones normales --}}
                                     <div class="d-flex align-items-center gap-2 flex-wrap">
-                                        <a href="{{ route('usuarios.edit', $usuario) }}"
+                                        <a href="{{ route('equipos.edit', $equipo) }}"
                                             class="btn btn-primary text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2">
                                             <i class="ph ph-pencil me-4"></i>
                                             Editar
@@ -88,7 +88,7 @@
 
                                         <a href="javascript:;" 
                                             class="btn btn-danger btn-delete text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2"
-                                            data-id="{{ $usuario->id }}" 
+                                            data-id="{{ $equipo->id }}" 
                                             data-tw-toggle="modal" 
                                             data-tw-target="#delete-confirmation-modal">
                                             <i class="ph ph-trash me-4"></i>
