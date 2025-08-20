@@ -30,12 +30,6 @@
     </div>
 
 
-
-
-
-
-
-
     {{-- Mensaje de error --}}
     @if (session('error'))
         <div class="bg-danger-200 rounded-16 p-12 flex-between flex-wrap gap-8 mb-16">
@@ -176,23 +170,23 @@
         </div>
     </div>
 
-    <div id="delete-permanentemente-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
+    <div id="delete-permanentemente-confirmation-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body p-5 text-center">
                     <i data-lucide="alert-triangle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
                     <div class="text-2xl mt-5">¿Eliminar Registro Permanentemente?</div>
                     <div class="text-slate-500 mt-2">
-                        Estás a punto de eliminar el registro <span id="name" class="font-bold"></span>.
+                        Estás a punto de eliminar el registro <span id="name" class="fw-bold"></span>.
                         <br>
                         Esta acción no se puede deshacer.
                     </div>
                 </div>
-                <div class="modal-footer text-center">
-                    <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24">Cancelar</button>
+                <div class="modal-footer text-center justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <form id="delete-permanent-form" method="POST" class="inline-block">
                         @csrf
-                        <button type="submit" class="btn btn-danger w-24">Eliminar</button>
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </div>
             </div>

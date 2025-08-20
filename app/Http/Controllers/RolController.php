@@ -33,6 +33,13 @@ class RolController extends Controller
         return redirect()->route('roles.index')->with('success', 'Rol creado correctamente.');
     }
 
+    // Mostrar formulario ver registro
+    public function show($id)
+    {
+        $rol = Rol::findOrFail($id);
+        return view('roles.show', compact('rol'));
+    }
+
     // Mostrar formulario para editar un rol
     public function edit(Rol $rol)
     {
@@ -45,7 +52,7 @@ class RolController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255|unique:roles,nombre,' . $rol->id,
             'descripcion' => 'nullable|string',
-            'estado' => 'required|in:Activo,Inactivo',
+            'estado' => 'required|in:activo,inactivo',
         ]);
 
         $rol->update($request->only('nombre', 'descripcion', 'estado'));
