@@ -121,7 +121,7 @@
                         </li>
 
                         <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
+                            <a href="{{ route('categorias.index') }}" class="sidebar-menu__link {{ request()->routeIs('categorias.*') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-tag"></i></span>
                                 <span class="text">Categorias</span>
                             </a>

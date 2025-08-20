@@ -1,10 +1,12 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EquipoController;
 
 // Página de inicio pública
@@ -39,6 +41,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('usuarios', UsuarioController::class);
     Route::put('/usuarios/{id}/restore', [UsuarioController::class, 'restore'])->name('usuarios.restore');
     Route::post('/usuarios/{id}/delete', [UsuarioController::class, 'delete'])->name('usuarios.delete');
+
+    // CATEGORIAS
+    Route::resource('categorias', CategoriaController::class);
+    Route::put('/categorias/{id}/restore', [CategoriaController::class, 'restore'])->name('categorias.restore');
+    Route::post('/categorias/{id}/delete', [CategoriaController::class, 'delete'])->name('categorias.delete');
 
     // EQUIPOS
     Route::resource('equipos', App\Http\Controllers\EquipoController::class);
