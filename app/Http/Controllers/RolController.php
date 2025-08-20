@@ -57,8 +57,8 @@ class RolController extends Controller
     //Proceso Eliminacion Logica
     public function destroy(Rol $rol)
     {
-        if ($rol->id === 1 || $rol->id === 2) {
-            return redirect()->route('roles.index')->with('error', 'No se puede eliminar roles Administrador y Responsable.');
+        if ($rol->id === 1 || $rol->id === 2 || $rol->id === 3) {
+            return redirect()->route('roles.index')->with('error', 'No se puede eliminar roles Administrador, Estudiante y Jurado.');
         }
 
         // Eliminar lógicamente

@@ -31,14 +31,14 @@
 
     <div class="card overflow-hidden">
         <div class="card-body overflow-x-auto">
-            <table id="dataTable" class="table table-striped align-middle mb-0 mt-5">
+            <table id="dataTable" class="table table-sm table-hover align-middle mb-3 mt-5 ">
                 <thead class="bg-light">
                     <tr>
-                        <th class="fw-semibold text-gray-600">Nro.</th>
-                        <th class="fw-semibold text-gray-600">Nombre</th>
-                        <th class="fw-semibold text-gray-600">Correo</th>
-                        <th class="fw-semibold text-gray-600">Rol</th>
-                        <th class="fw-semibold text-gray-600">Acciones</th>
+                        <th class="fw-semibold text-gray-600 text-small">Nro.</th>
+                        <th class="fw-semibold text-gray-600 text-small">Nombre</th>
+                        <th class="fw-semibold text-gray-600 text-small">Correo</th>
+                        <th class="fw-semibold text-gray-600 text-small">Rol</th>
+                        <th class="fw-semibold text-gray-600 text-small">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,24 +62,31 @@
                                     <span class="h6 mb-0 fw-medium text-gray-300">{{ $usuario->rol->nombre }}</span>
                                 </div>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 @if ($usuario->eliminado)
-                                    {{-- Botón restaurar --}}
-                                    <a href="{{ route('usuarios.show', $usuario) }}" class="btn btn-primary" title="Ver rol">
-                                        <i data-lucide="eye" class="w-4 h-4 mr-2"></i> Ver
-                                    </a>
-                                    <a href="javascript:;" class="btn btn-success btn-restore" data-id="{{ $usuario->id }}"
-                                        data-tw-toggle="modal" data-tw-target="#restore-confirmation-modal">
-                                        <i data-lucide="rotate-ccw" class="w-4 h-4 mr-2"></i> Restaurar
-                                    </a>
-                                    <a href="javascript:;" class="btn btn-danger btn-delete-permanent" data-id="{{ $usuario->id }}"
-                                        data-name="{{ $usuario->nombre }}" data-tw-toggle="modal"
-                                        data-tw-target="#delete-permanentemente-confirmation-modal">
-                                        <i data-lucide="trash-2" class="w-4 h-4 mr-2"></i> Eliminar Permanentemente
-                                    </a>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        {{-- Botón restaurar --}}
+                                        <a href="{{ route('usuarios.show', $usuario) }}" 
+                                            class="btn btn-primary text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2">
+                                            <i data-lucide="eye" class="w-4 h-4 mr-2"></i> 
+                                            Ver
+                                        </a>
+                                        <a href="javascript:;" class="btn btn-success btn-restore text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2" 
+                                            data-id="{{ $usuario->id }}"
+                                            data-tw-toggle="modal" 
+                                            data-tw-target="#restore-confirmation-modal">
+                                            <i data-lucide="rotate-ccw" class="w-4 h-4 mr-2"></i> Restaurar
+                                        </a>
+                                        <a href="javascript:;" class="btn btn-danger btn-delete-permanent text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2" 
+                                            data-id="{{ $usuario->id }}"
+                                            data-name="{{ $usuario->nombre }}" data-tw-toggle="modal"
+                                            data-tw-target="#delete-permanentemente-confirmation-modal">
+                                            <i data-lucide="trash-2" class="w-4 h-4 mr-2"></i> Eliminar Permanentemente
+                                        </a>
+                                    </div>
                                 @else
                                     {{-- Botones normales --}}
-                                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <div class="d-flex justify-content-center gap-2">
                                         <a href="{{ route('usuarios.edit', $usuario) }}"
                                             class="btn btn-primary text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2">
                                             <i class="ph ph-pencil me-4"></i>
@@ -89,8 +96,8 @@
                                         <a href="javascript:;" 
                                             class="btn btn-danger btn-delete text-sm btn-sm px-24 rounded-pill py-12 d-flex align-items-center gap-2"
                                             data-id="{{ $usuario->id }}" 
-                                            data-tw-toggle="modal" 
-                                            data-tw-target="#delete-confirmation-modal">
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#delete-confirmation-modal">
                                             <i class="ph ph-trash me-4"></i>
                                             Eliminar
                                         </a>
@@ -106,28 +113,25 @@
     </div>
 
 <!-- BEGIN: Delete Confirmation Modal -->
-<div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <form id="delete-form" method="POST">
-            @csrf
-            @method('DELETE')
-            <div class="modal-content">
-                <div class="modal-body p-0">
-                    <div class="p-5 text-center">
-                        <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i> 
-                        <div class="text-3xl mt-5">¿Estás seguro?</div>
-                        <div class="text-slate-500 mt-2">
-                            Esta acción eliminará el registro permanentemente.
-                            <br> No se puede deshacer.
-                        </div>
-                    </div>
-                    <div class="px-5 pb-8 text-center">
-                        <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancelar</button>
-                        <button type="submit" class="btn btn-danger w-24">Eliminar</button>
+<div id="delete-confirmation-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <form id="delete-form" method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body text-center">
+                    <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
+                    <div class="fs-3 fw-bold mt-3">¿Estás seguro?</div>
+                    <div class="text-muted mt-2">
+                        Esta acción eliminará el registro.
                     </div>
                 </div>
-            </div>
-        </form>
+                <div class="modal-footer text-center justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -137,18 +141,18 @@
         <div class="modal-content">
             <div class="modal-body p-5 text-center">
                 <i data-lucide="alert-triangle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
-                <div class="text-2xl mt-5">¿Eliminar Rol Permanentemente?</div>
+                <div class="text-2xl mt-5">¿Estás seguro?</div>
                 <div class="text-slate-500 mt-2">
-                    Estás a punto de eliminar el rol <span id="name" class="font-bold"></span>. 
+                    Estás a punto de eliminar el registro Permanentemente. 
                     <br>
                     Esta acción no se puede deshacer.
                 </div>
             </div>
             <div class="modal-footer text-center">
-                <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24">Cancelar</button>
+                <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary">Cancelar</button>
                 <form id="delete-rol-form" method="POST" class="inline-block">
                     @csrf
-                    <button type="submit" class="btn btn-danger w-24">Eliminar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>
             </div>
         </div>

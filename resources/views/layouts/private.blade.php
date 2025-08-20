@@ -31,6 +31,12 @@
     <link rel="stylesheet" href="{{ asset('assets_private/css/jquery-jvectormap-2.0.5.css') }}">
     <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('assets_private/css/main.css') }}">
+
+    <style>
+        table.dataTable td .btn {
+            white-space: nowrap; /* evita que se rompan en varias líneas */
+        }
+    </style>
 </head>
 
 <body>
@@ -526,11 +532,21 @@
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable({
+                autoWidth: false,
                 language: {
                     url: "{{ asset('assets_private/json/es-ES.json') }}"
                 },
                 responsive: true,
                 pageLength: 10,
+                columnDefs: [
+                    { 
+                        targets: -1,   // la última columna (acciones)
+                        orderable: false,
+                        searchable: false,
+                        width: "1%",   // hace que use lo mínimo
+                        className: "text-center acciones"
+                    }
+                ],
                 initComplete: function () {
                     $('.datatable').removeClass('datatable-loading');
                 }
