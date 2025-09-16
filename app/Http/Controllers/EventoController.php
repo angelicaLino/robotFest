@@ -3,81 +3,92 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class EventoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Mostrar todos los eventos
     public function index()
     {
-        $eventos = Evento::all();
+        $eventos = Evento::with('categorias')->get();
         return view('eventos.index', compact('eventos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Mostrar formulario de creación
     public function create()
     {
-        return view('eventos.create');
+        $categorias = Categoria::all();
+        return view('eventos.create', compact('categorias'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Guardar nuevo evento
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
-            'estado' => 'required|string',
+            'fecha' => 'required|date',
+            'ubicacion' => 'nullable|string|max:255',
+            'estado' => 'required|in:activo,inactivo,eliminado',
+            'categorias' => 'required|array',
+            'categorias.*' => 'exists:categorias,id',
         ]);
 
-        Evento::create($request->all());
+        // Crear evento
+        $evento = Evento::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'fecha' => $request->fecha,
+            'ubicacion' => $request->ubicacion,
+            'estado' => $request->estado,
+        ]);
 
-        return redirect()->route('eventos.index')->with('success', 'Evento creado correctamente.');
+        // Asociar categorías
+        $evento->categorias()->attach($request->categorias);
+
+        return redirect()->route('eventos.index')->with('success', 'Evento creado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Evento $evento)
-    {
-        return view('eventos.show', compact('evento'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Mostrar formulario de edición
     public function edit(Evento $evento)
     {
-        return view('eventos.edit', compact('evento'));
+        $categorias = Categoria::all();
+        return view('eventos.edit', compact('evento', 'categorias'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Actualizar evento
     public function update(Request $request, Evento $evento)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
-            'estado' => 'required|string',
+            'fecha' => 'required|date',
+            'ubicacion' => 'nullable|string|max:255',
+            'estado' => 'required|in:activo,inactivo,eliminado',
+            'categorias' => 'required|array',
+            'categorias.*' => 'exists:categorias,id',
         ]);
 
-        $evento->update($request->all());
+        // Actualizar evento
+        $evento->update([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'fecha' => $request->fecha,
+            'ubicacion' => $request->ubicacion,
+            'estado' => $request->estado,
+        ]);
 
-        return redirect()->route('eventos.index')->with('success', 'Evento actualizado correctamente.');
+        // Sincronizar categorías
+        $evento->categorias()->sync($request->categorias);
+
+        return redirect()->route('eventos.index')->with('success', 'Evento actualizado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Eliminar evento
     public function destroy(Evento $evento)
     {
         $evento->delete();
-        return redirect()->route('eventos.index')->with('success', 'Evento eliminado correctamente.');
+        return redirect()->route('eventos.index')->with('success', 'Evento eliminado correctamente');
     }
 }

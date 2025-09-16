@@ -9,18 +9,11 @@ class Evento extends Model
 {
     use HasFactory;
 
-    protected $table = 'eventos';
-
     protected $fillable = [
-        'nombre', 
-        'descripcion', 
-        'fecha', 
-        'estado', 
-        'eliminado'
+        'nombre', 'descripcion', 'fecha', 'ubicacion', 'estado'
     ];
 
-    public function competencias()
-    {
-        return $this->hasMany(Competencia::class);
+    public function categorias() {
+        return $this->belongsToMany(Categoria::class, 'evento_categoria', 'evento_id', 'categoria_id');
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User; // Importamos el modelo User
+use App\Models\Rol; // Importamos el modelo User
+
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -19,30 +21,40 @@ class UsuarioController extends Controller
     /**
      * Mostrar el formulario de creación
      */
+  
     public function create()
-    {
-        $roles = User::all(); // Trae todos los roles
-        return view('usuarios.create', compact('roles')); // Pasa los roles a la vista
-    }
+{
+    $roles = Rol::all(); // ahora sí trae los roles reales
+    return view('usuarios.create', compact('roles'));
+}
+
+
+
     /**
      * Guardar un nuevo usuario
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+    
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|unique:users',
+        'password' => 'required|string|min:6|confirmed',
+        'rol_id' => 'required|exists:roles,id', // validamos que sea un rol válido
+        'estado' => 'required|in:activo,inactivo', // ejemplo de estado
+    ]);
 
-        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
-    }
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'rol_id' => $request->rol_id, // aquí se asigna el rol
+        'estado' => $request->estado,
+    ]);
+
+    return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
+}
 
 
     /**
@@ -57,10 +69,12 @@ class UsuarioController extends Controller
     /**
      * Mostrar el formulario de edición
      */
+   
     public function edit($id)
     {
         $usuario = User::findOrFail($id);
-        return view('usuarios.edit', compact('usuario'));
+        $roles = Rol::all(); // traemos todos los roles
+        return view('usuarios.edit', compact('usuario', 'roles'));
     }
 
     /**

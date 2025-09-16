@@ -22,4 +22,10 @@ class Categoria extends Model
     {
         return $this->hasMany(Competencia::class);
     }
+    
+    public function eventos()
+    {
+    return $this->belongsToMany(Evento::class, 'evento_categoria', 'categoria_id', 'evento_id');
+    }
+
 }

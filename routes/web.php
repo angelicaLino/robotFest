@@ -37,10 +37,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/roles/{id}/delete', [RolController::class, 'delete'])->name('roles.delete');
 
 
+
     // USUARIOS
     Route::resource('usuarios', UsuarioController::class);
     Route::put('/usuarios/{id}/restore', [UsuarioController::class, 'restore'])->name('usuarios.restore');
     Route::post('/usuarios/{id}/delete', [UsuarioController::class, 'delete'])->name('usuarios.delete');
+
 
     // CATEGORIAS
     Route::resource('categorias', CategoriaController::class);
