@@ -18,10 +18,17 @@ Route::get('/', function () {
 // Esto es lo que crea Breeze automáticamente
 require __DIR__ . '/auth.php';
 
+
+
 // 🔹 Dashboard (solo usuarios autenticados y verificados)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+  //  return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
 
 // 🔹 Rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {

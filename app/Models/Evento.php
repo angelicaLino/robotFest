@@ -9,11 +9,28 @@ class Evento extends Model
 {
     use HasFactory;
 
+    // Campos que se pueden asignar masivamente
     protected $fillable = [
-        'nombre', 'descripcion', 'fecha', 'ubicacion', 'estado'
+        'nombre',
+        'descripcion',
+        'fecha',
+        'ubicacion',   // Asegúrate de que coincida con el nombre en la tabla
+        'estado'
     ];
 
-    public function categorias() {
-        return $this->belongsToMany(Categoria::class, 'evento_categoria', 'evento_id', 'categoria_id');
+    // Conversión automática de fecha a objeto Carbon
+    protected $casts = [
+        'fecha' => 'date',
+    ];
+
+    // Relación muchos a muchos con categorías
+    public function categorias()
+    {
+        return $this->belongsToMany(
+            Categoria::class,   // Modelo relacionado
+            'evento_categoria', // Nombre de la tabla pivote
+            'evento_id',        // FK hacia esta tabla
+            'categoria_id'      // FK hacia la tabla relacionada
+        );
     }
 }

@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{{ asset('assets_private/css/jquery-jvectormap-2.0.5.css') }}">
     <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('assets_private/css/main.css') }}">
+    
 
     <style>
         table.dataTable td .btn {
@@ -135,12 +136,6 @@
                                 <span class="text">Inscripciones</span>
                             </a>
                         </li>
-
-                        
-
-                        
-
-                        
 
                         <li class="sidebar-menu__item">
                              <a href="#" class="sidebar-menu__link">
@@ -522,6 +517,7 @@
     <!-- main js -->
     <script src="{{ asset('assets_private/js/main.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -807,9 +803,7 @@
             chart.render();
         }
         createLineChart('doubleLineChart', '#27CFA7');
-        // =========================== Double Line Chart End ===============================
 
-        // ================================= Multiple Radial Bar Chart Start =============================
         var options = {
             series: [100, 60, 25],
             chart: {
@@ -823,7 +817,7 @@
             plotOptions: {
                 radialBar: {
                     hollow: {
-                        size: '30%',  // Adjust this value to control the bar width
+                        size: '30%',  
                     },
                     dataLabels: {
                         name: {
