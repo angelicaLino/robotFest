@@ -17,7 +17,7 @@
                     </a>
                 </div>
                 <div class="hero-element">
-                    <img src="{{ asset('assets_public/img/game-charecters.png')}}" alt="thumb">
+                    <img src="{{ asset('assets_public/img/imagen_personas.png')}}" alt="thumb">
                     <div class="shape-wrap">
                         <div class="shape shape-1"></div>
                         <div class="shape shape-2"></div>
@@ -40,10 +40,10 @@
     <section class="matches-section padding">
         <div class="container">
             <div class="section-heading mb-40 text-center wow fade-in-bottom" data-wow-delay="200ms">
-                <h3>Upcoming matches</h3>
-                <h2>Battles Extreme <br> Masters <span>Tournament</span></h2>
-                <p>Our success in creating business solutions is due in large part <br>to our talented and highly
-                    committed team.</p>
+                <h3>Próximos partidos</h3>
+                <h2>Batallas extremas <br> Maestres <span>Torneo</span></h2>
+                <p>Nuestro éxito en la creación de soluciones empresariales se debe en gran parte 
+                    <br>a nuestros talentosos y altamente equipo comprometido.</p>
             </div>
             <ul class="upcoming-matches">
                 <li class="matches-list">
@@ -113,10 +113,9 @@
     <section class="watch-live-section padding-bottom">
         <div class="container">
             <div class="section-heading mb-40 text-center wow fade-in-bottom" data-wow-delay="200ms">
-                <h3>Watch The Gameplay</h3>
-                <h2>Watch Live <span>Streaming</span></h2>
-                <p>Our success in creating business solutions is due in large part <br>to our talented and highly
-                    committed team.</p>
+                <h3>Mira la jugabilidad</h3>
+                <h2>Ver en vivo <span>Transmisión</span></h2>
+                <p>Nuestro éxito en la creación de soluciones empresariales se debe en gran parte <br>a nuestros talentosos y altamente equipo comprometido.</p>
             </div>
             <div class="carousel-wrap">
                 <div class="watch-carousel swiper-container">
@@ -163,10 +162,10 @@
     <section class="team-section padding-bottom">
         <div class="container">
             <div class="section-heading text-center mb-40 wow fade-in-bottom" data-wow-delay="200ms">
-                <h3>Our Gammers</h3>
-                <h2>Meet Our <span>Gamers</span></h2>
-                <p>Our success in creating business solutions is due in large part <br>to our talented and highly
-                    committed team.</p>
+                <h3>Nuestros jugadores</h3>
+                <h2>Conozca a nuestro <span>Jugadores</span></h2>
+                <p>Nuestro éxito en la creación de soluciones empresariales se debe en gran parte 
+                    <br>a nuestros talentosos y altamente equipo comprometido.</p>
             </div>
             <div class="outside-spacing">
                 <div class="team-carousel">
@@ -275,11 +274,11 @@
             <div class="row align-items-center">
                 <div class="col-md-6 sm-padding">
                     <div class="section-heading">
-                        <h3>Send Us a Mail</h3>
-                        <h2>Join Us As a Super Fans and Get all <span>the Benefits</span></h2>
-                        <p>Our success in creating business solutions is due in large part <br>to our talented and
-                            highly committed team.</p>
-                        <a href="contact.html" class="default-btn">Join Our Team <span></span></a>
+                        <h3>Envíanos un correo</h3>
+                        <h2>Únase a nosotros como súper fanáticos y obtenga todo <span>Los beneficios</span></h2>
+                        <p>Nuestro éxito en la creación de soluciones empresariales se debe en gran parte
+                            <br>a nuestros talentosos y Equipo altamente comprometido.</p>
+                        <a href="contact.html" class="default-btn">Únase a nuestro equipo <span></span></a>
                     </div>
                 </div>
                 <div class="col-md-6 sm-padding">
@@ -287,17 +286,17 @@
                         <form action="contact.php" method="post" id="ajax_contact" class="form-horizontal">
                             <div class="contact-form-group">
                                 <div class="form-field">
-                                    <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Your Name" required>
+                                    <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Tu nombre" required>
                                 </div>
                                 <div class="form-field">
-                                    <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email" required>
+                                    <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Correo electrónico" required>
                                 </div>
                                 <div class="form-field message">
-                                    <textarea id="message" name="message" cols="30" rows="4" class="form-control" placeholder="Message" required></textarea>
+                                    <textarea id="message" name="message" cols="30" rows="4" class="form-control" placeholder="Mensaje" required></textarea>
                                 </div>
                                 <div class="form-field">
-                                    <button id="submit" class="default-btn" type="submit">Send
-                                        Massage<span></span></button>
+                                    <button id="submit" class="default-btn" type="submit">Enviar Mensaje
+                                        <span></span></button>
                                 </div>
                             </div>
                             <div id="form-messages" class="alert" role="alert"></div>

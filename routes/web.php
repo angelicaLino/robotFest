@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
@@ -27,9 +28,9 @@ Route::controller(PublicController::class)->group(function () {
 Route::middleware(['auth'])->group(function () {
     
     // Dashboard
-    Route::get('/dashboard', fn () => view('dashboard'))
-        ->middleware(['verified'])
-        ->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['verified'])
+    ->name('dashboard');
 
     // Perfil de usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

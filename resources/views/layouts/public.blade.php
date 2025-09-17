@@ -87,7 +87,6 @@
                         </ul>
                     </div><!-- /.header-menu-wrap -->
                     <div class="header-right">
-                        <div class="search-icon dl-search-icon"><i class="las la-search"></i></div>
                         <a class="default-btn" href="{{ route('login') }}">Iniciar Sesión</a>
                         <!-- Burger menu -->
                         <div class="mobile-menu-icon">
@@ -103,15 +102,6 @@
         </div><!-- /.primary-header -->
     </header><!-- /.site-header-->
 
-    <div id="popup-search-box">
-        <div class="box-inner-wrap d-flex align-items-center">
-            <form id="form" action="#" method="get" role="search">
-                <input id="popup-search" type="text" name="s" placeholder="Type keywords here...">
-                <button id="popup-search-button" type="submit" name="submit"><i class="las la-search"></i></button>
-            </form>
-        </div>
-    </div><!-- /#popup-search-box -->
-
     @yield('content')
 
     <footer class="footer-section">
@@ -119,9 +109,8 @@
             <div class="row footer-items">
                 <div class="col-lg-3 col-sm-6 sm-padding">
                     <div class="footer-item">
-                        <a class="brand" href="index.html"><img src="{{ asset('assets_public/img/logo.png')}}" alt="logo"></a>
-                        <p>Our success in creating business solutions is due in large part to our talented and highly
-                            committed team.</p>
+                        <a class="brand" href="index.html"><img src="{{ asset('assets_private/images/logo/EMI_fondo_transparente.png')}}" alt="logo"></a>
+                        <p>Nuestro éxito en la creación de soluciones empresariales se debe en gran parte a nuestro talento y alta equipo comprometido.</p>
                         <ul class="social-list">
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -133,7 +122,7 @@
                 <div class="col-lg-3 col-sm-6 sm-padding">
                     <div class="footer-item footer-list">
                         <div class="widget-title">
-                            <h3>Usefull Links</h3>
+                            <h3>Enlaces útiles</h3>
                         </div>
                         <ul class="footer-links">
                             <li><a href="upcoming-matches.html">Tournaments</a></li>
@@ -147,24 +136,24 @@
                 <div class="col-lg-3 col-sm-6 sm-padding">
                     <div class="footer-item">
                         <div class="widget-title">
-                            <h3>Contact Us</h3>
+                            <h3>Contáctenos</h3>
                         </div>
                         <ul class="footer-contact">
-                            <li><span>Location:</span>153 Williamson Plaza, Maggieberg, MT 09514</li>
-                            <li><span>Join Us:</span>Info@YourGmail24.com</li>
-                            <li><span>Phone:</span>+1 (062) 109-9222</li>
+                            <li><span>Ubicación:</span>153 Williamson Plaza, Maggieberg, MT 09514</li>
+                            <li><span>Únase a nosotros:</span>Info@YourGmail24.com</li>
+                            <li><span>Teléfono:</span>+1 (062) 109-9222</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 sm-padding">
                     <div class="footer-item subscribe-wrap">
                         <div class="widget-title">
-                            <h3>Newsletter Signup</h3>
+                            <h3>Suscripción al boletín</h3>
                         </div>
                         <form action="#" class="subscribe-form">
-                            <input class="form-control" type="email" name="email" placeholder="Your Email" required="">
+                            <input class="form-control" type="email" name="email" placeholder="Tu correo electrónico" required="">
                             <input type="hidden" name="action" value="mailchimpsubscribe">
-                            <button class="submit">Subscribe Now</button>
+                            <button class="submit">Suscríbete Ahora</button>
                             <div class="clearfix"></div>
                             <div id="subscribe-result">
                                 <div class="subscription-success"></div>
@@ -177,7 +166,7 @@
         </div>
         <div class="copyright-wrap">
             <div class="container">
-                <p>© <span id="currentYear"></span> ThemeEaster All Rights Reserved.</p>
+                <p>© <span id="currentYear"></span> Robot Fest Todos los derechos reservados.</p>
             </div>
         </div>
         <!--copyright-wrap-->
