@@ -8,24 +8,27 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\PublicController;
 
-// Página de inicio pública
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-// 🔹 Rutas de autenticación (login, register, forgot password, etc.)
-// Esto es lo que crea Breeze automáticamente
 require __DIR__ . '/auth.php';
 
-// 🔹 Dashboard (solo usuarios autenticados y verificados)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// 🌐 Páginas públicas
+Route::controller(PublicController::class)->group(function () {
+    Route::get('/', 'inicio')->name('public.inicio');
+    Route::get('/contacto', 'contacto')->name('public.contacto');
+    Route::get('/equipo', 'equipo')->name('public.equipo');
+    Route::get('/acerca-de', 'acerca')->name('public.acerca');
+    Route::get('/equipos', 'equipos')->name('public.equipos');
+});
 
-// 🔹 Rutas protegidas por autenticación
+// 🔒 Área privada - Rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {
     
+    // Dashboard
+    Route::get('/dashboard', fn () => view('dashboard'))
+        ->middleware(['verified'])
+        ->name('dashboard');
+
     // Perfil de usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -35,8 +38,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('roles', RolController::class)->parameters(['roles' => 'rol']);
     Route::put('/roles/{id}/restore', [RolController::class, 'restore'])->name('roles.restore');
     Route::post('/roles/{id}/delete', [RolController::class, 'delete'])->name('roles.delete');
-
-
 
     // USUARIOS
     Route::resource('usuarios', UsuarioController::class);
