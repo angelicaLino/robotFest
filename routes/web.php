@@ -12,6 +12,8 @@ use App\Http\Controllers\PublicController;
 
 require __DIR__ . '/auth.php';
 
+
+
 // 🌐 Páginas públicas
 Route::controller(PublicController::class)->group(function () {
     Route::get('/', 'inicio')->name('public.inicio');

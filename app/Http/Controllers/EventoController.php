@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 
 class EventoController extends Controller
 {
-    // Mostrar todos los eventos
+    // Mostrar todos los eventos (solo activos e inactivos)
     public function index()
     {
-        $eventos = Evento::with('categorias')->get();
+        $eventos = Evento::with('categorias')
+            ->whereIn('estado', ['activo','inactivo'])
+            ->orderBy('fecha', 'asc')
+            ->get();
+
         return view('eventos.index', compact('eventos'));
     }
 
@@ -29,8 +33,8 @@ class EventoController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'fecha' => 'required|date',
-            'ubicacion' => 'nullable|string|max:255',
-            'estado' => 'required|in:activo,inactivo,eliminado',
+            'ubicacion' => 'required|string|max:255',
+            'estado' => 'required|in:activo,inactivo',
             'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
         ]);
@@ -64,8 +68,8 @@ class EventoController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'fecha' => 'required|date',
-            'ubicacion' => 'nullable|string|max:255',
-            'estado' => 'required|in:activo,inactivo,eliminado',
+            'ubicacion' => 'required|string|max:255',
+            'estado' => 'required|in:activo,inactivo',
             'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
         ]);
@@ -85,10 +89,11 @@ class EventoController extends Controller
         return redirect()->route('eventos.index')->with('success', 'Evento actualizado correctamente');
     }
 
-    // Eliminar evento
+    // Eliminación lógica (cambiar estado a 'eliminado')
     public function destroy(Evento $evento)
     {
-        $evento->delete();
+        $evento->update(['estado' => 'eliminado']);
         return redirect()->route('eventos.index')->with('success', 'Evento eliminado correctamente');
     }
 }
+

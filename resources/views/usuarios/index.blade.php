@@ -48,7 +48,7 @@
             </div>
         </div>
     @endif
-
+FUCK YOU
 
 
     <div class="card overflow-hidden">
