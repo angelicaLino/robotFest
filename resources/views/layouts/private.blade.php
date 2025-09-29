@@ -131,7 +131,7 @@
                     -->
 
                         <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
+                            <a href="{{ route('inscripciones.index') }}" class="sidebar-menu__link {{ request()->routeIs('equipos.*') ? 'activePage' : '' }}">
                                 <span class="icon"><i class="ph ph-clipboard-text"></i></span>
                                 <span class="text">Inscripciones</span>
                             </a>

@@ -10,6 +10,8 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\InscripcionController;
+
 
 require __DIR__ . '/auth.php';
 
@@ -63,5 +65,11 @@ Route::middleware(['auth'])->group(function () {
     
     // EQUIPOS
     Route::resource('equipos', App\Http\Controllers\EquipoController::class);
+
+    
+    // Inscripciones
+    Route::resource('inscripciones', InscripcionController::class);
+    Route::put('/inscripciones/{id}/aprobar', [InscripcionController::class, 'aprobar'])->name('inscripciones.aprobar');
+    Route::put('/inscripciones/{id}/rechazar', [InscripcionController::class, 'rechazar'])->name('inscripciones.rechazar');
 
 });
