@@ -24,10 +24,16 @@ Route::controller(PublicController::class)->group(function () {
     Route::get('/equipo', 'equipo')->name('public.equipo');
     Route::get('/acerca-de', 'acerca')->name('public.acerca');
     Route::get('/equipos', 'equipos')->name('public.equipos');
+
+    Route::get('/categorias', 'categorias')->name('public.categorias');
+
+    Route::get('/eventos', 'eventos')->name('public.eventos');
+    Route::get('/evento/{id}', 'evento')->name('public.evento'); 
 });
 
 // 🔒 Área privada - Rutas protegidas por autenticación
-Route::middleware(['auth'])->group(function () {
+//Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
     
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])

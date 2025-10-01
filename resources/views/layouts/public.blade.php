@@ -6,7 +6,7 @@
     <meta name="description" content="Galactic eSports and Gaming HTML5 Template">
     <meta name="author" content="ThemeEaster">
 
-    <title>Pagina de Bienvenida</title>
+    <title>Robot Fest</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets_public/img/favicon.png')}}">
 
@@ -49,41 +49,9 @@
                     <div class="header-menu-wrap">
                         <ul class="nav-menu">
                             <li class="{{ request()->routeIs('public.inicio') ? 'active' : '' }}"><a href="{{ route('public.inicio') }}">INICIO</a></li>
-
-                            <li><a href="#">Torneo</a>
-                                <ul>
-                                    <li><a href="upcoming-matches.html">Upcoming Matches</a></li>
-                                    <li><a href="stream-schedule.html">Stream Schedule</a></li>
-                                    <li><a href="match-details.html">Match Details</a></li>
-                                    <li><a href="player-details.html">Player Details</a></li>
-                                    <li><a href="team-details.html">Team Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Pages</a>
-                                <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="our-gamers.html">Our Gamers</a></li>
-                                    <li><a href="sponsors.html">Sponsors</a></li>
-                                    <li><a href="faq-page.html">Help &amp; Faq'assets_public</a></li>
-                                    <li><a href="404.html">404 Error</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="shop.html">Shop</a>
-                                <ul>
-                                    <li><a href="shop.html">Shop Grid</a></li>
-                                    <li><a href="shop-details.html">Shop Details</a></li>
-                                    <li><a href="cart.html">Add to Cart Page</a></li>
-                                    <li><a href="checkout.html">Checkout Page</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="blog-grid.html">Blog</a>
-                                <ul>
-                                    <li><a href="blog-grid.html">Grid Layout</a></li>
-                                    <li><a href="blog-classic.html">Classic Layout</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li class="{{ request()->routeIs('public.eventos') ? 'active' : '' }}"><a href="{{ route('public.eventos') }}">EVENTOS</a></li>
+                            <li class="{{ request()->routeIs('public.categorias') ? 'active' : '' }}"><a href="{{ route('public.categorias') }}">CATEGORIAS</a></li> 
+                             <li class="{{ request()->routeIs('public.contacto') ? 'active' : '' }}"><a href="{{ route('public.contacto') }}">CONTACTO</a></li>
                         </ul>
                     </div><!-- /.header-menu-wrap -->
                     <div class="header-right">

@@ -481,77 +481,41 @@
         </div>
     </section><!-- /.shop-section -->
 
+
+    <!-- #region eventos -->
     <section class="blog-section">
         <div class="container">
             <div class="section-heading mb-40 text-center wow fade-in-bottom" data-wow-delay="200ms">
-                <h3>What'assets_public on our mind</h3>
-                <h2>News and <span>Headlines</span></h2>
-                <p>Our success in creating business solutions is due in large part <br>to our talented and highly
-                    committed team.</p>
+                <h3>Lo que tenemos preparado</h3>
+                <h2>Próximos <span>Eventos</span></h2>
+                <p>Nuestro éxito en organizar eventos se debe en gran parte a 
+                    <br>la pasión y compromiso de nuestra comunidad.</p>
             </div>
             <div class="row grid-post">
-                <div class="col-lg-4 col-md-6 padding-15 wow fade-in-bottom" data-wow-delay="300ms">
+                @foreach ($eventos as $evento)
+                   <div class="col-lg-4 col-md-6 padding-15 wow fade-in-bottom" data-wow-delay="300ms">
                     <div class="post-card">
                         <div class="post-thumb">
                             <img src="{{ asset('assets_public/img/post-1.jpg')}}" alt="post">
-                            <a href="blog-classic.html" class="post-category">Business</a>
+                            <a href="blog-classic.html" class="post-category">Proximamente</a>
                         </div>
                         <div class="post-content-wrap">
                             <ul class="post-meta">
-                                <li><i class="las la-calendar"></i>Jan 01 2022</li>
-                                <li><i class="las la-user"></i>Elliot Alderson</li>
+                                <li><i class="las la-calendar"></i>{{ \Carbon\Carbon::parse($evento->fecha)->translatedFormat('d M Y') }}</li>
+                                <li><i class="las la-location-arrow"></i>Paranimfo</li>
                             </ul>
                             <div class="post-content">
-                                <h3><a href="blog-details.html">How to start initiating an startup in few days.</a></h3>
-                                <p>Financial experts support or help you to to find out which way you can raise your
-                                    funds more...</p>
-                                <a href="blog-details.html" class="read-more">Read More</a>
+                                <h3><a href="blog-details.html">{{ $evento->nombre }}</a></h3>
+                                <p>{{ $evento->descripcion }}</p>
+                                <a href="{{ route('public.evento', $evento->id) }}" class="read-more">Ver más</a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 padding-15 wow fade-in-bottom" data-wow-delay="400ms">
-                    <div class="post-card">
-                        <div class="post-thumb">
-                            <img src="{{ asset('assets_public/img/post-2.jpg')}}" alt="post">
-                            <a href="blog-classic.html" class="post-category">Startup</a>
-                        </div>
-                        <div class="post-content-wrap">
-                            <ul class="post-meta">
-                                <li><i class="las la-calendar"></i>Jan 01 2022</li>
-                                <li><i class="las la-user"></i>Elliot Alderson</li>
-                            </ul>
-                            <div class="post-content">
-                                <h3><a href="blog-details.html">Financial experts support help you to find out.</a></h3>
-                                <p>Financial experts support or help you to to find out which way you can raise your
-                                    funds more...</p>
-                                <a href="blog-details.html" class="read-more">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 padding-15 wow fade-in-bottom" data-wow-delay="500ms">
-                    <div class="post-card">
-                        <div class="post-thumb">
-                            <img src="{{ asset('assets_public/img/post-3.jpg')}}" alt="post">
-                            <a href="blog-classic.html" class="post-category">Finance</a>
-                        </div>
-                        <div class="post-content-wrap">
-                            <ul class="post-meta">
-                                <li><i class="las la-calendar"></i>Jan 01 2022</li>
-                                <li><i class="las la-user"></i>Elliot Alderson</li>
-                            </ul>
-                            <div class="post-content">
-                                <h3><a href="blog-details.html">Innovative business all over the world.</a></h3>
-                                <p>Financial experts support or help you to to find out which way you can raise your
-                                    funds more...</p>
-                                <a href="blog-details.html" class="read-more">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> 
+                @endforeach
             </div>
         </div>
     </section>
-    <!--blog-section-->
+    <!-- #endregion -->
+
 @endsection
