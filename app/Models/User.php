@@ -32,10 +32,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Scopes
+    public function scopeEstudiantes($query)
+    {
+        return $query->whereHas('rol', function ($q) {
+            $q->where('nombre', 'Estudiante');
+        });
+    }
+
     // 👇 Relación con Role
     public function rol()
     {
         return $this->belongsTo(Rol::class, 'rol_id');
+    }
+
+    public function equipos()
+    {
+        return $this->belongsToMany(Equipo::class, 'integrantes_equipos', 'user_id', 'equipo_id')
+                    ->withPivot('rol')
+                    ->withTimestamps();
     }
     
 }

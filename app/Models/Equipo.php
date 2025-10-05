@@ -32,4 +32,11 @@ class Equipo extends Model
     {
         return $this->hasMany(IntegranteEquipo::class);
     }
+
+    public function usuarios()
+    {
+        return $this->belongsToMany(User::class, 'integrantes_equipos', 'equipo_id', 'user_id')
+                    ->withPivot('rol')
+                    ->withTimestamps();
+    }
 }

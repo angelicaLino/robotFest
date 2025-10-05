@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipo;
 use App\Models\User;
+use App\Models\IntegranteEquipo;
 use App\Models\Competencia;
+
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
@@ -24,7 +26,7 @@ class EquipoController extends Controller
     public function create()
     {
         $competencias = Competencia::where('estado', 'activo')->get();
-        $usuarios = User::where('estado', 'activo')->get();
+        $usuarios = User::estudiantes()->where('estado', 'activo')->get();
         return view('equipos.create', compact('competencias', 'usuarios'));
     }
 
@@ -37,21 +39,28 @@ class EquipoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'competencia_id' => 'required|exists:competencias,id',
-            'descripcion' => 'nullable|string|max:255',
+            'descripcion' => 'nullable|string',
             'estado' => 'required|in:activo,inactivo',
             'users' => 'nullable|array',
-            'users.*' => 'exists:users,id',
+            'users.*' => 'exists:users,id'
         ]);
 
-        $equipo = Equipo::create($request->only(['nombre', 'competencia_id', 'descripcion', 'estado']));
+        // Crear equipo
+        $equipo = Equipo::create([
+            'nombre' => $request->nombre,
+            'competencia_id' => $request->competencia_id,
+            'descripcion' => $request->descripcion,
+            'estado' => $request->estado,
+        ]);
 
-        // Registrar integrantes
+        // Asignar usuarios como integrantes
         if ($request->has('users')) {
-            foreach ($request->users as $user_id) {
-                $equipo->integrantes()->firstOrCreate(
-                    ['user_id' => $user_id],
-                    ['rol' => 'integrante']
-                );
+            foreach ($request->users as $userId) {
+                IntegranteEquipo::create([
+                    'equipo_id' => $equipo->id,
+                    'user_id' => $userId,
+                    //'rol' => 'integrante', // 👈 puedes setear un valor por defecto o permitir elegirlo en el form
+                ]);
             }
         }
 
