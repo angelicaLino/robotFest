@@ -12,6 +12,7 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\InscripcionController;
 
+use App\Http\Controllers\SLController;
 
 require __DIR__ . '/auth.php';
 
@@ -77,5 +78,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('inscripciones', InscripcionController::class);
     Route::put('/inscripciones/{id}/aprobar', [InscripcionController::class, 'aprobar'])->name('inscripciones.aprobar');
     Route::put('/inscripciones/{id}/rechazar', [InscripcionController::class, 'rechazar'])->name('inscripciones.rechazar');
+
+
+    Route::resource('sl', SLController::class);  
+    Route::post('/sl/cerrar-competencia/{competencia}', [SLController::class, 'cerrarCompetencia'])->name('sl.cerrarCompetencia');
 
 });

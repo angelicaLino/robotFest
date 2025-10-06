@@ -6,6 +6,8 @@ use App\Models\Equipo;
 use App\Models\User;
 use App\Models\IntegranteEquipo;
 use App\Models\Competencia;
+use App\Models\Evento;
+use App\Models\Categoria;
 
 use Illuminate\Http\Request;
 
@@ -25,9 +27,9 @@ class EquipoController extends Controller
      */
     public function create()
     {
-        $competencias = Competencia::where('estado', 'activo')->get();
+        $eventos = Evento::with('categorias.competencias')->where('estado', 'activo')->get();
         $usuarios = User::estudiantes()->where('estado', 'activo')->get();
-        return view('equipos.create', compact('competencias', 'usuarios'));
+        return view('equipos.create', compact('eventos', 'usuarios'));
     }
 
 

@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('nombre');
             $table->text('descripcion')->nullable();
-            $table->enum('estado', ['activo', 'inactivo', 'eliminado'])->default('activo');
+            $table->enum('estado', ['activo', 'inactivo', 'eliminado', 'finalizado'])->default('activo');
             $table->boolean('eliminado')->default(false);
 
             // Relaciones

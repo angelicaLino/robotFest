@@ -37,6 +37,10 @@
         table.dataTable td .btn {
             white-space: nowrap; /* evita que se rompan en varias líneas */
         }
+
+        .table tbody td {
+            color: #667797 !important;
+        }
     </style>
 </head>
 
@@ -129,19 +133,26 @@
                             </a>
                         </li>
                     -->
+   
 
-                        <li class="sidebar-menu__item">
-                            <a href="{{ route('inscripciones.index') }}" class="sidebar-menu__link {{ request()->routeIs('inscripciones.*') ? 'activePage' : '' }}">
-                                <span class="icon"><i class="ph ph-clipboard-text"></i></span>
-                                <span class="text">Inscripciones</span>
+                        <li class="sidebar-menu__item has-dropdown">
+                            <a href="javascript:void(0)" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-graduation-cap"></i></span>
+                                <span class="text">Competencia</span>
                             </a>
-                        </li>
-
-                        <li class="sidebar-menu__item">
-                             <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-arrows-left-right"></i></span>
-                                <span class="text">Enfrentamientos</span>
-                             </a>
+                            <!-- Submenu start -->
+                            <ul class="sidebar-submenu">
+                                <li class="sidebar-submenu__item">
+                                    <a href="{{ route('sl.index') }}" class="sidebar-submenu__link"> Seguidor de Línea </a>
+                                </li>
+                                <li class="sidebar-submenu__item">
+                                    <a href="mentor-courses.html" class="sidebar-submenu__link"> Velocista </a>
+                                </li>
+                                <li class="sidebar-submenu__item">
+                                    <a href="create-course.html" class="sidebar-submenu__link"> Zumo </a>
+                                </li>
+                            </ul>
+                            <!-- Submenu End -->
                         </li>
 
                         <li class="sidebar-menu__item">

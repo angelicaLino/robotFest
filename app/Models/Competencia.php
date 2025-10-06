@@ -29,4 +29,9 @@ class Competencia extends Model
     {
         return $this->belongsTo(Categoria::class);
     }
+
+    public function parametros()
+    {
+        return $this->hasMany(ParametroCompetencia::class);
+    }
 }

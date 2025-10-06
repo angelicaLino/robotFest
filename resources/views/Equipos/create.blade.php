@@ -7,12 +7,14 @@
         <div class="breadcrumb mb-24">
             <ul class="flex-align gap-4">
                 <li>
-                    <a href="{{ route('dashboard') }}" class="text-gray-200 fw-normal text-15 hover-text-main-600">Panel Principal</a>
+                    <a href="{{ route('dashboard') }}" class="text-gray-200 fw-normal text-15 hover-text-main-600">Panel
+                        Principal</a>
                 </li>
 
                 <li><span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span></li>
 
-                <li><a href="{{ route('equipos.index') }}" class="text-gray-200 fw-normal text-15 hover-text-main-600">Equipos</a></li>
+                <li><a href="{{ route('equipos.index') }}"
+                        class="text-gray-200 fw-normal text-15 hover-text-main-600">Equipos</a></li>
 
                 <li><span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span></li>
 
@@ -40,21 +42,30 @@
                 {{-- Nombre del equipo --}}
                 <div class="mb-3">
                     <label for="nombre" class="form-label fw-semibold">Nombre del Equipo</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control" 
-                           value="{{ old('nombre') }}" required>
+                    <input type="text" name="nombre" id="nombre" class="form-control" value="{{ old('nombre') }}" required>
                 </div>
 
-                {{-- Competencia --}}
-                <div class="mb-3">
-                    <label for="competencia_id" class="form-label fw-semibold">Competencia</label>
-                    <select name="competencia_id" id="competencia_id" class="form-control" required>
-                        <option value="">-- Seleccionar competencia --</option>
-                        @foreach ($competencias as $competencia)
-                            <option value="{{ $competencia->id }}" 
-                                {{ old('competencia_id') == $competencia->id ? 'selected' : '' }}>
-                                {{ $competencia->nombre }}
-                            </option>
+                <div class="form-group">
+                    <label for="evento">Evento</label>
+                    <select id="evento" name="evento_id" class="form-control">
+                        <option value="">-- Selecciona un evento --</option>
+                        @foreach($eventos as $evento)
+                            <option value="{{ $evento->id }}">{{ $evento->nombre }}</option>
                         @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria" name="categoria_id" class="form-control" disabled>
+                        <option value="">-- Selecciona un evento primero --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="competencia">Competencia</label>
+                    <select id="competencia" name="competencia_id" class="form-control" disabled>
+                        <option value="">-- Selecciona una categoría primero --</option>
                     </select>
                 </div>
 
@@ -133,46 +144,107 @@
 
 @endsection
 @section('script')
-<script>
-    function agregarIntegrante(id, nombre, email) {
-        // Evita duplicados
-        if (document.getElementById("integrante-" + id)) return;
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const eventos = @json($eventos); // Todos los eventos, categorías y competencias
 
-        // Agregar fila en tabla de integrantes con combo de rol
-        let row = `
-            <tr id="integrante-${id}">
-                <td>${nombre}</td>
-                <td>${email}</td>
-                <td>
-                    <select name="roles[${id}]" class="form-control" required>
-                        <option value="integrante">Integrante</option>
-                        <option value="capitán">Capitán</option>
-                    </select>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="quitarIntegrante(${id})">Quitar</button>
-                </td>
-            </tr>
-        `;
-        document.querySelector("#integrantes-table tbody").insertAdjacentHTML("beforeend", row);
+            const eventoSelect = document.getElementById('evento');
+            const categoriaSelect = document.getElementById('categoria');
+            const competenciaSelect = document.getElementById('competencia');
 
-        // Crear input oculto para el id del usuario
-        let hiddenInput = `<input type="hidden" name="users[]" value="${id}" id="input-user-${id}">`;
-        document.getElementById("usuarios-seleccionados").insertAdjacentHTML("beforeend", hiddenInput);
+            // Cuando cambia el evento
+            eventoSelect.addEventListener('change', function () {
+                const eventoId = parseInt(this.value);
+                categoriaSelect.innerHTML = '';
+                competenciaSelect.innerHTML = '<option value="">-- Selecciona una categoría primero --</option>';
+                competenciaSelect.disabled = true;
 
-        // Ocultar usuario de la lista izquierda
-        document.getElementById("user-row-" + id).style.display = "none";
-    }
+                if (!eventoId) {
+                    categoriaSelect.innerHTML = '<option value="">-- Selecciona un evento primero --</option>';
+                    categoriaSelect.disabled = true;
+                    return;
+                }
 
-    function quitarIntegrante(id) {
-        // Quitar fila de integrantes
-        document.getElementById("integrante-" + id).remove();
+                const evento = eventos.find(e => e.id === eventoId);
+                let opciones = '<option value="">-- Selecciona una categoría --</option>';
+                evento.categorias.forEach(c => {
+                    if (c.estado === 'activo') {
+                        opciones += `<option value="${c.id}">${c.nombre}</option>`;
+                    }
+                });
+                categoriaSelect.innerHTML = opciones;
+                categoriaSelect.disabled = false;
+            });
 
-        // Quitar input oculto
-        document.getElementById("input-user-" + id).remove();
+            // Cuando cambia la categoría
+            categoriaSelect.addEventListener('change', function () {
+                const categoriaId = parseInt(this.value);
+                competenciaSelect.innerHTML = '';
 
-        // Reactivar usuario en la tabla izquierda
-        document.getElementById("user-row-" + id).style.display = "";
-    }
-</script>
+                if (!categoriaId) {
+                    competenciaSelect.innerHTML = '<option value="">-- Selecciona una categoría primero --</option>';
+                    competenciaSelect.disabled = true;
+                    return;
+                }
+
+                // Buscar la categoría dentro del evento seleccionado
+                const evento = eventos.find(e => e.id === parseInt(eventoSelect.value));
+                const categoria = evento.categorias.find(c => c.id === categoriaId);
+                let opciones = '<option value="">-- Selecciona una competencia --</option>';
+                categoria.competencias.forEach(comp => {
+                    if (comp.estado === 'activo') {
+                        opciones += `<option value="${comp.id}">${comp.nombre}</option>`;
+                    }
+                });
+
+                competenciaSelect.innerHTML = opciones;
+                competenciaSelect.disabled = false;
+            });
+        });
+    </script>
+
+
+
+    <script>
+        function agregarIntegrante(id, nombre, email) {
+            // Evita duplicados
+            if (document.getElementById("integrante-" + id)) return;
+
+            // Agregar fila en tabla de integrantes con combo de rol
+            let row = `
+                <tr id="integrante-${id}">
+                    <td>${nombre}</td>
+                    <td>${email}</td>
+                    <td>
+                        <select name="roles[${id}]" class="form-control" required>
+                            <option value="integrante">Integrante</option>
+                            <option value="capitán">Capitán</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="quitarIntegrante(${id})">Quitar</button>
+                    </td>
+                </tr>
+            `;
+            document.querySelector("#integrantes-table tbody").insertAdjacentHTML("beforeend", row);
+
+            // Crear input oculto para el id del usuario
+            let hiddenInput = `<input type="hidden" name="users[]" value="${id}" id="input-user-${id}">`;
+            document.getElementById("usuarios-seleccionados").insertAdjacentHTML("beforeend", hiddenInput);
+
+            // Ocultar usuario de la lista izquierda
+            document.getElementById("user-row-" + id).style.display = "none";
+        }
+
+        function quitarIntegrante(id) {
+            // Quitar fila de integrantes
+            document.getElementById("integrante-" + id).remove();
+
+            // Quitar input oculto
+            document.getElementById("input-user-" + id).remove();
+
+            // Reactivar usuario en la tabla izquierda
+            document.getElementById("user-row-" + id).style.display = "";
+        }
+    </script>
 @endsection

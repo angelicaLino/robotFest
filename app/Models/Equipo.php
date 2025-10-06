@@ -39,4 +39,17 @@ class Equipo extends Model
                     ->withPivot('rol')
                     ->withTimestamps();
     }
+
+   // Relación con los intentos de Seguidor de Línea
+    public function intentosSL()
+    {
+        return $this->hasMany(SLRobotIntento::class, 'equipo_id');
+    }
+
+    // Relación con resultados de Seguidor de Línea
+    public function resultadosSL()
+    {
+        return $this->hasMany(SLResultadosCompetencia::class, 'equipo_id');
+    }
+
 }
